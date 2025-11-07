@@ -52,7 +52,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <svg className="w-full h-24 text-background" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <svg className="w-full h-24 text-background -mb-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M0,30 Q300,0 600,30 T1200,30 L1200,120 L0,120 Z" fill="currentColor"></path>
       </svg>
     </section>
