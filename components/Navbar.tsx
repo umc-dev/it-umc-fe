@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isAkademikOpen, setIsAkademikOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50border-b border-border shadow-sm bg-transparent backdrop-blur-md">
+    <nav className="sticky top-0 z-50border-b border-border shadow-sm bg-white/50 backdrop-blur-md z-10">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -53,7 +53,7 @@ export default function Navbar() {
               </button>
               {isAkademikOpen && (
                 <div className="absolute top-full left-0 pt-2 w-56 z-50">
-                  <div className="bg-transparent backdrop-blur-md border border-border rounded-xl shadow-xl py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="bg-white/50 backdrop-blur-md border border-border rounded-xl shadow-xl py-2 animate-in fade-in slide-in-from-top-2 duration-200">
                     <Link
                       href="/akademik/program"
                       className="block px-4 py-3 text-foreground hover:text-accent hover:bg-accent/10 transition-all duration-200 rounded-lg mx-2"
