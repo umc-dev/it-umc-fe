@@ -83,7 +83,7 @@ export default function Navbar() {
                       </div>
                     </Link>
                     <Link
-                      href="/akademik/career-path"
+                      href="/akademik/prospek-karir"
                       className="block px-4 py-3 text-foreground hover:text-accent hover:bg-accent/10 transition-all duration-200 rounded-lg mx-2"
                     >
                       <div className="font-medium">Prospek Karir</div>
@@ -162,7 +162,7 @@ export default function Navbar() {
                     UKT
                   </Link>
                   <Link
-                    href="/akademik/career-path"
+                    href="/akademik/prospek-karir"
                     className="block px-4 py-2 text-foreground hover:bg-accent/10 rounded-lg transition-colors"
                   >
                     Prospek Karir
