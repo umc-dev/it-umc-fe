@@ -3,6 +3,12 @@ import { Calendar } from "lucide-react";
 import { newsItems } from "@/lib/news-data";
 import Image from "next/image";
 
+export const metadata = {
+  title: "Berita & Pengumuman - Program Studi Teknik Informatika",
+  description:
+    "Ikuti perkembangan terkini dari Program Studi Teknik Informatika Universitas Muhammadiyah Cirebon",
+};
+
 export default function AllNewsPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
