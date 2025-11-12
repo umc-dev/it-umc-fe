@@ -63,9 +63,9 @@ export default function Navbar() {
               </button>
               {isAkademikOpen && (
                 <div className="absolute top-full left-0 pt-2 w-56 z-50">
-                  <div className="bg-white/50 backdrop-blur-md border border-border rounded-xl shadow-xl py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="bg-white border border-border rounded-xl shadow-xl py-2 animate-in fade-in slide-in-from-top-2 duration-200">
                     <Link
-                      href="/akademik/program"
+                      href="/akademik/program-studi"
                       className="block px-4 py-3 text-foreground hover:text-accent hover:bg-accent/10 transition-all duration-200 rounded-lg mx-2"
                     >
                       <div className="font-medium">Program Studi</div>
@@ -150,7 +150,7 @@ export default function Navbar() {
               {isAkademikOpen && (
                 <div className="pl-4 space-y-1">
                   <Link
-                    href="/akademik/program"
+                    href="/akademik/program-studi"
                     className="block px-4 py-2 text-foreground hover:bg-accent/10 rounded-lg transition-colors"
                   >
                     Program Studi

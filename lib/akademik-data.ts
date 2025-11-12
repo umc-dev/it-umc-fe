@@ -49,42 +49,99 @@ export const programsStudi: ProgramStudi[] = [
     id: "ti-s1",
     name: "Teknik Informatika",
     level: "S1",
-    akreditasi: "A",
-    akreditasiDate: "2023",
+    akreditasi: "Baik Sekali",
+    akreditasiDate: "2024",
     totalSKS: 144,
     masaStudi: "4 Tahun",
-    pimpinProdi: "Dr. Ahmad Ridho, S.T., M.T.",
-    pimpinProdiEmail: "ahmad.ridho@umcirebon.ac.id",
+    pimpinProdi: "Harry Gunawan M.Kom",
+    pimpinProdiEmail: "harrygunawan@umc.ac.id",
     kurikulum: [
       {
         semester: 1,
         courses: [
-          { name: "Kalkulus I", sks: 3 },
-          { name: "Algoritma dan Pemrograman", sks: 4 },
+          { name: "Bahasa Inggris (Reading for Concepts)", sks: 2 },
+          { name: "Agama", sks: 2 },
+          { name: "Dasar Algoritma dan Pemrograman", sks: 2 },
+          { name: "Praktik Dasar Algoritma dan Pemrograman", sks: 1 },
           { name: "Logika Matematika", sks: 3 },
-          { name: "Pengantar Sistem Komputer", sks: 2 },
-          { name: "Bahasa Indonesia", sks: 2 },
-          { name: "Pendidikan Agama", sks: 2 },
-        ],
+          { name: "Matematika", sks: 2 },
+          { name: "Pancasila", sks: 2 },
+          { name: "Fisika", sks: 3 },
+          { name: "Pengantar Teknologi Informasi", sks: 2 }
+        ]
       },
       {
         semester: 2,
         courses: [
-          { name: "Kalkulus II", sks: 3 },
-          { name: "Struktur Data", sks: 4 },
-          { name: "Basis Data", sks: 3 },
-          { name: "Arsitektur Komputer", sks: 3 },
-          { name: "Komunikasi Profesional", sks: 2 },
-          { name: "Pancasila", sks: 2 },
-        ],
+          { name: "Sistem Operasi", sks: 3 },
+          { name: "AIK 1 (Kemanusian dan Keimanan)", sks: 2 },
+          { name: "Bahasa Indonesia", sks: 2 },
+          { name: "Sistem Digital", sks: 3 },
+          { name: "Kalkulus 1", sks: 2 },
+          { name: "Kewarganegaraan", sks: 2 },
+          { name: "Pemrograman Terstruktur", sks: 3 },
+          { name: "Kewirausahaan Islami", sks: 2 }
+        ]
       },
-    ],
+      {
+        semester: 3,
+        courses: [
+          { name: "Pemrograman II (PBO)", sks: 3 },
+          { name: "AIK 2 (Ibadah, Akhlak dan Muamalah)", sks: 2 },
+          { name: "Arsitektur dan Organisasi Komputer", sks: 3 },
+          { name: "Sistem Informasi (APSI)", sks: 3 },
+          { name: "Kalkulus II", sks: 2 },
+          { name: "Komunikasi data", sks: 2 },
+          { name: "Statistik dan Probabilitas", sks: 2 },
+          { name: "Struktur Data dan Algoritma", sks: 3 }
+        ]
+      },
+      {
+        semester: 4,
+        courses: [
+          { name: "Rekayasa Perangkat Lunak", sks: 3 },
+          { name: "Basis Data", sks: 3 },
+          { name: "Pemrograman Berorientasi Objek Lanjut", sks: 3 },
+          { name: "AIK 3 (Kemuhammadiyahan)", sks: 2 },
+          { name: "Jaringan Komputer", sks: 3 },
+          { name: "Matematika Diskrit", sks: 3 },
+          { name: "Analisis dan Strategi Algoritma", sks: 3 }
+        ]
+      },
+      {
+        semester: 5,
+        courses: [
+          { name: "Manajemen Proyek Teknologi Informasi", sks: 2 },
+          { name: "Basis Data Lanjut", sks: 3 },
+          { name: "Metode Penelitian", sks: 2 },
+          { name: "AIK 4 (Islam dan Ilmu Pengetahuan)", sks: 2 },
+          { name: "Tes Implementasi Sistem", sks: 3 },
+          { name: "Teori Bahasa dan Otomata", sks: 3 },
+          { name: "Pemrograman V (Pemrograman Web)", sks: 3 },
+          { name: "Grafika Komputer dan Visualisasi", sks: 3 },
+          { name: "Interaksi Manusia - Komputer", sks: 2 }
+        ]
+      },
+      {
+        semester: 6,
+        courses: [
+          { name: "Sistem Paralel dan Terdistribusi", sks: 3 },
+          { name: "Kecerdasan Komputasional", sks: 3 },
+          { name: "Pengamanan Sistem Komputer", sks: 3 },
+          { name: "Pemrograman Web Lanjut", sks: 3 },
+          { name: "Analisis dan Perancangan Berorientasi Objek", sks: 3 },
+          { name: "Pemrograman Visual", sks: 3 },
+          { name: "Etika Profesi", sks: 2 },
+          { name: "Kuliah Kerja Mahasiswa (KKM)", sks: 3 }
+        ]
+      }
+    ]
   },
   {
     id: "ti-d3",
     name: "Teknik Informatika",
     level: "D3",
-    akreditasi: "B",
+    akreditasi: "Baik Sekali",
     akreditasiDate: "2022",
     totalSKS: 108,
     masaStudi: "3 Tahun",
