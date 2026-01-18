@@ -37,7 +37,7 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Dosen & Staf",
+    label: "Dosen",
     href: "/dosen",
   },
   {
@@ -84,7 +84,7 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col leading-tight">
               <h1 className="font-bold text-primary">Teknik Informatika</h1>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground md:hidden lg:block">
                 Universitas Muhammadiyah Cirebon
               </p>
             </div>

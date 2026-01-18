@@ -15,7 +15,7 @@ export default function HeroProfessionalFix() {
       {/* --- 1. Background Layer  --- */}
       <div className="absolute inset-0 z-0 select-none">
         <Image
-          src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop"
+          src="/kampus_umc.jpg"
           alt="Kampus Universitas Muhammadiyah Cirebon"
           fill
           className="object-cover"
