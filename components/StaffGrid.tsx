@@ -1,63 +1,82 @@
-"use client"
+"use client";
 
-import type { StaffMember } from "@/lib/staff-data"
-import Image from "next/image"
-import { Mail, Phone } from "lucide-react"
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card"
-import { SKELETON_COUNTS } from "@/lib/skeleton-utils"
+import type { Dosen } from "@/types/dosen"; // Pastikan path interface Dosen benar
+import Image from "next/image";
+import { ExternalLink, GraduationCap, Microscope } from "lucide-react";
+import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card";
+import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
 interface StaffGridProps {
-  members: StaffMember[]
-  isLoading?: boolean
+  members: Dosen[];
+  isLoading?: boolean;
 }
 
-export default function StaffGrid({ members, isLoading = false }: StaffGridProps) {
+export default function StaffGrid({
+  members,
+  isLoading = false,
+}: StaffGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading
-        ? Array.from({ length: SKELETON_COUNTS.STAFF }).map((_, i) => <SkeletonStaffCard key={i} />)
+        ? Array.from({ length: SKELETON_COUNTS.STAFF }).map((_, i) => (
+            <SkeletonStaffCard key={i} />
+          ))
         : members.map((member) => (
             <div
               key={member.id}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-border hover:border-accent"
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-border hover:border-accent group"
             >
-              {/* Image */}
-              <div className="relative w-full h-64 bg-muted overflow-hidden">
+              {/* Image Section */}
+              <div className="relative w-full h-72 bg-muted overflow-hidden">
                 <Image
-                  src={member.image || "/placeholder.svg"}
+                  src={member.photo || "/placeholder.svg"}
                   alt={member.name}
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
+                  unoptimized
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
+                {/* Badge Expertise */}
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-primary/90 text-white text-[10px] uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm">
+                    {member.expertise}
+                  </span>
+                </div>
               </div>
 
-              {/* Content */}
+              {/* Content Section */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-primary mb-1">{member.name}</h3>
-                <p className="text-sm font-semibold text-accent mb-3">{member.position}</p>
+                <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1">
+                  {member.name}
+                </h3>
+                <p className="text-sm font-medium text-accent mb-6">
+                  Dosen Program Studi
+                </p>
 
-                {member.specialization && <p className="text-sm text-muted-foreground mb-4">{member.specialization}</p>}
-
-                {/* Contact Info */}
-                <div className="space-y-2 pt-4 border-t border-border">
+                {/* Action Buttons (Link) */}
+                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-border">
                   <a
-                    href={`mailto:${member.email}`}
-                    className="flex items-center gap-2 text-sm text-foreground hover:text-accent transition-colors"
+                    href={member.teaching}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-accent hover:text-white transition-all shadow-sm"
                   >
-                    <Mail size={16} className="text-accent" />
-                    <span className="truncate">{member.email}</span>
+                    <GraduationCap size={14} />
+                    Pengajaran
                   </a>
                   <a
-                    href={`tel:${member.phone}`}
-                    className="flex items-center gap-2 text-sm text-foreground hover:text-accent transition-colors"
+                    href={member.research}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-accent hover:text-white transition-all shadow-sm"
                   >
-                    <Phone size={16} className="text-accent" />
-                    <span>{member.phone}</span>
+                    <Microscope size={14} />
+                    Pengabdian
                   </a>
                 </div>
               </div>
             </div>
           ))}
     </div>
-  )
+  );
 }
