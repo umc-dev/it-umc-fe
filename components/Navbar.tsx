@@ -66,6 +66,11 @@ export default function Navbar() {
     }
   };
 
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+    setActiveDropdown(null); // optional, biar submenu juga ikut tertutup
+  };
+
   return (
     <nav className="sticky top-0 z-50 border-b border-border shadow-sm bg-white backdrop-blur-md">
       <div className="container mx-auto px-4">
@@ -183,6 +188,7 @@ export default function Navbar() {
                           <Link
                             key={subIndex}
                             href={subItem.href}
+                            onClick={closeMobileMenu}
                             className="block px-4 py-2 text-foreground hover:bg-accent/10 rounded-lg transition-colors"
                           >
                             {subItem.label}
@@ -195,6 +201,7 @@ export default function Navbar() {
                   // Mobile Link Biasa
                   <Link
                     href={item.href || "#"}
+                    onClick={closeMobileMenu}
                     className="block px-4 py-2 text-foreground hover:bg-accent/10 rounded-lg transition-colors"
                   >
                     {item.label}
