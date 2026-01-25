@@ -92,7 +92,7 @@ export default function Partners({ partnerships = [] }: PartnersProps) {
           {marqueePartners.map((partner, index) => (
             <div
               key={`${partner.id}-${index}`}
-              className="group relative flex items-center justify-center min-w-[180px] px-6"
+              className="group relative flex items-center justify-center min-w-45 px-6"
             >
               {/* Tooltip */}
               <div className="pointer-events-none absolute -top-8 opacity-0 group-hover:opacity-100 transition">

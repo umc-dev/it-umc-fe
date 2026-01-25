@@ -7,14 +7,17 @@ import ProgramInfo from "@/components/Sections/ProgramInfo";
 
 export default async function Home() {
   const newsResponse = await getNews({ limit: 4 });
+  const allNews = newsResponse.data || [];
+
   const partnershipsResponse = await getPartnerships({ limit: 50 });
+  const allPartnerships = partnershipsResponse.data || [];
 
   return (
     <>
       <Hero />
       <ProgramInfo />
-      <LatestNews news={newsResponse.data || []} />
-      <Partners partnerships={partnershipsResponse.data || []} />
+      <LatestNews news={allNews} />
+      <Partners partnerships={allPartnerships} />
     </>
   );
 }
