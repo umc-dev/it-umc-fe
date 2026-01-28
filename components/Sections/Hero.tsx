@@ -9,10 +9,35 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-export default function HeroProfessionalFix() {
+interface HeroProps {
+  stats?: {
+    accreditation?: string;
+    activeStudents: number;
+    totalPartners: number;
+    employmentRate?: string;
+  };
+}
+
+export default function Hero({ stats }: HeroProps) {
+  // Default values sebagai fallback jika API belum siap/kosong
+  const {
+    accreditation = "Baik Sekali",
+    activeStudents = 1500,
+    totalPartners = 50,
+    employmentRate = "90%",
+  } = stats || {};
+
+  // Formatter untuk mengubah angka besar menjadi ringkas (contoh: 3500 -> 3.5k)
+  const formatNumber = (num: number) => {
+    return Intl.NumberFormat("en-US", {
+      notation: "compact",
+      maximumFractionDigits: 1,
+    }).format(num);
+  };
+
   return (
     <section className="relative w-full min-h-screen flex flex-col justify-end overflow-hidden font-sans">
-      {/* --- 1. Background Layer  --- */}
+      {/* --- 1. Background Layer --- */}
       <div className="absolute inset-0 z-0 select-none">
         <Image
           src="/kampus_umc.jpg"
@@ -21,33 +46,25 @@ export default function HeroProfessionalFix() {
           className="object-cover"
           priority
         />
-
-        {/* LAYER 1: Overlay Gelap Merata (Agar teks pasti terbaca di mana saja) */}
         <div className="absolute inset-0 bg-slate-950/60" />
-
-        {/* LAYER 2: Gradient Bawah (Agar transisi ke footer/section bawah mulus) */}
         <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/40 to-transparent" />
-
-        {/* Pattern Overlay (Texture) */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
       </div>
 
       {/* --- 2. Main Content Area --- */}
-      {/* Tambahkan 'pt-24' atau 'pt-32' untuk mobile agar turun ke bawah navbar */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-24 pt-32 md:pt-20 flex-grow flex flex-col justify-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-24 pt-32 md:pt-20 grow flex flex-col justify-center">
         <div className="max-w-4xl">
-          {/* Badge */}
+          {/* Badge Pendaftaran */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 backdrop-blur-md mb-6 animate-fade-in-up">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
             </span>
             <span className="text-xs md:text-sm font-medium text-blue-100 tracking-wide uppercase shadow-sm">
               Pendaftaran Dibuka
             </span>
           </div>
 
-          {/* Headline dengan Drop Shadow agar extra jelas */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg">
             Membangun Generasi <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-accent drop-shadow-none">
@@ -58,14 +75,12 @@ export default function HeroProfessionalFix() {
             </span>
           </h1>
 
-          {/* Subheadline: Warna lebih terang (gray-200) daripada sebelumnya */}
           <p className="text-lg text-gray-100 mb-8 max-w-2xl leading-relaxed font-light border-l-2 border-accent pl-4 drop-shadow-md">
             Bergabunglah dengan Program Studi Teknik Informatika UMC. Kurikulum
             adaptif, dosen praktisi, dan ekosistem pembelajaran modern untuk
             masa depan karir gemilang.
           </p>
 
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="https://pmb.umc.ac.id"
@@ -90,19 +105,18 @@ export default function HeroProfessionalFix() {
         </div>
       </div>
 
-      {/* --- 3. Bottom Info Bar (Responsive Grid) --- */}
+      {/* --- 3. Bottom Info Bar (Dynamic Data) --- */}
       <div className="relative z-20 w-full border-t border-white/10 bg-slate-950/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Di Mobile jadi 2 kolom (grid-cols-2), di Tablet/Desktop 4 kolom */}
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-            {/* Stat Item 1 */}
+            {/* Stat 1: Akreditasi */}
             <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group">
               <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400">
                 <Award className="w-5 h-5 md:w-6 md:h-6" />
               </div>
               <div>
                 <p className="text-xl md:text-2xl font-bold text-white">
-                  Baik Sekali
+                  {accreditation}
                 </p>
                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
                   Akreditasi
@@ -110,14 +124,14 @@ export default function HeroProfessionalFix() {
               </div>
             </div>
 
-            {/* Stat Item 2 */}
+            {/* Stat 2: Mahasiswa (Dynamic) */}
             <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group">
               <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
                 <GraduationCap className="w-5 h-5 md:w-6 md:h-6" />
               </div>
               <div>
                 <p className="text-xl md:text-2xl font-bold text-white">
-                  3.5k+
+                  {formatNumber(activeStudents)}+
                 </p>
                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
                   Mahasiswa
@@ -125,26 +139,30 @@ export default function HeroProfessionalFix() {
               </div>
             </div>
 
-            {/* Stat Item 3 */}
+            {/* Stat 3: Mitra (Dynamic) */}
             <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group border-t border-white/10 md:border-t-0">
               <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400">
                 <Globe className="w-5 h-5 md:w-6 md:h-6" />
               </div>
               <div>
-                <p className="text-xl md:text-2xl font-bold text-white">50+</p>
+                <p className="text-xl md:text-2xl font-bold text-white">
+                  {formatNumber(totalPartners)}+
+                </p>
                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
                   Mitra
                 </p>
               </div>
             </div>
 
-            {/* Stat Item 4 */}
+            {/* Stat 4: Pekerjaan */}
             <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group border-t border-white/10 md:border-t-0">
               <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400">
                 <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6" />
               </div>
               <div>
-                <p className="text-xl md:text-2xl font-bold text-white">90%</p>
+                <p className="text-xl md:text-2xl font-bold text-white">
+                  {employmentRate}
+                </p>
                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
                   Kerja
                 </p>
