@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         hostname: "picsum.photos",
       },
       {
+        protocol: 'https',
+        hostname: 'img.youtube.com', 
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "9090",

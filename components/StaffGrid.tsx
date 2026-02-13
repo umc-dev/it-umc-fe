@@ -1,8 +1,8 @@
 "use client";
 
-import type { Dosen } from "@/types/dosen"; // Pastikan path interface Dosen benar
+import type { Dosen } from "@/types/dosen";
 import Image from "next/image";
-import { ExternalLink, GraduationCap, Microscope } from "lucide-react";
+import { GraduationCap, Microscope } from "lucide-react";
 import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card";
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
@@ -26,8 +26,7 @@ export default function StaffGrid({
               key={member.id}
               className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-border hover:border-accent group"
             >
-              {/* Image Section */}
-              <div className="relative w-full h-72 bg-muted overflow-hidden">
+              <div className="relative w-full aspect-4/5 bg-muted overflow-hidden">
                 <Image
                   src={member.photo || "/placeholder.svg"}
                   alt={member.name}

@@ -2,12 +2,14 @@ import { getNews } from "@/actions/news";
 import { getPartnerships } from "@/actions/partnerships";
 import { getVisionMission } from "@/actions/visionMission";
 import { getStatisticStudents } from "@/actions/statisticStudent";
+import { getAlumni } from "@/actions/alumni";
 
 import Hero from "@/components/Sections/Hero";
 import LatestNews from "@/components/Sections/LatestNews";
 import Partners from "@/components/Sections/Partners";
 import ProgramInfo from "@/components/Sections/ProgramInfo";
 import StudentStatistics from "@/components/Sections/StudentStatistics";
+import AlumniTestimonials from "@/components/Sections/AlumniTestimonials";
 
 export default async function Home() {
   // Ambil data News
@@ -22,11 +24,16 @@ export default async function Home() {
   // Ambil data statistik 
   const statisticsResponse = await getStatisticStudents({ limit: 100 });
 
+  // Ambil data Alumni 
+  const alumniResponse = await getAlumni({ limit: 6 });
+
   // Extract Data
   const allNews = newsResponse.data || [];
   const visionMissionData = visionMissionResponse.data || [];
   const allPartnerships = partnershipsResponse.data || [];
   const statisticsData = statisticsResponse.data || [];
+  const alumniData = alumniResponse.data || []; 
+  
   const totalPartners = partnershipsResponse.meta?.total || 0;
 
   // Rumus: Sum(Masuk) - Sum(Lulus) dari semua tahun
@@ -38,8 +45,8 @@ export default async function Home() {
   // props untuk Hero
   const heroStats = {
     accreditation: "Baik Sekali",
-    activeStudents: totalActiveStudents > 0 ? totalActiveStudents : 3500, // Fallback angka
-    totalPartners: totalPartners > 0 ? totalPartners : 50, // Fallback angka
+    activeStudents: totalActiveStudents > 0 ? totalActiveStudents : 3500,
+    totalPartners: totalPartners > 0 ? totalPartners : 50,
     employmentRate: "90%",
   };
 
@@ -48,6 +55,7 @@ export default async function Home() {
       <Hero stats={heroStats} />
       <ProgramInfo visionMission={visionMissionData} />
       <StudentStatistics data={statisticsData} />
+      <AlumniTestimonials alumni={alumniData} />
       <LatestNews news={allNews} />
       <Partners partnerships={allPartnerships} />
     </>
