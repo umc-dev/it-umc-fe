@@ -1,6 +1,7 @@
 export interface Alumni {
   id: string;
   name: string;
+  photo?: string | null; // URL foto alumni
   video: string | null; // URL video (bisa YouTube atau direct link)
   message: string;
   year: number;

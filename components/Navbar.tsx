@@ -55,6 +55,10 @@ const NAV_ITEMS: NavItem[] = [
     href: "/dosen",
   },
   {
+    label: "Alumni",
+    href: "/alumni",
+  },
+  {
     label: "Fasilitas",
     href: "/fasilitas",
   },
