@@ -23,7 +23,7 @@ export async function getDosen(params?: {
   }
 
   const res = await fetch(`${API_URL}/dosen?${searchParams.toString()}`, {
-    next: { revalidate: 3600 }, // ISR 1 jam karena data dosen jarang berubah
+    next: { revalidate: 300 }, // ISR 1 jam karena data dosen jarang berubah
   });
 
   if (!res.ok) {

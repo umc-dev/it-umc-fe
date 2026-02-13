@@ -15,8 +15,6 @@ export default async function DosenPage() {
   const response = await getDosen({ limit: 50 });
   const lecturers = response.data;
 
-  console.log(response.data);
-
   return (
     <>
       {/* Hero Section */}

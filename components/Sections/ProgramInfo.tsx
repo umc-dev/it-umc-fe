@@ -6,6 +6,20 @@ import {
   Target,
   Compass,
 } from "lucide-react";
+import type { VisionMission } from "@/types/visionMission";
+
+interface ProgramInfoProps {
+  visionMission?: VisionMission[];
+}
+
+// Fallback statis jika API belum ada data / error
+const STATIC_VM: VisionMission = {
+  id: 0,
+  vision: "Menjadi program studi Teknik Informatika terdepan dalam menghasilkan profesional yang inovatif, berkarakter, dan berdaya saing global",
+  mission: "Pendidikan berkualitas tinggi di bidang TI.\nPenelitian relevan dengan kebutuhan industri.\nPengabdian masyarakat berbasis transfer teknologi.",
+  createdAt: "",
+  updatedAt: ""
+};
 
 const features = [
   {
@@ -34,7 +48,15 @@ const features = [
   },
 ];
 
-export default function ProgramInfo() {
+export default function ProgramInfo({ visionMission = [] }: ProgramInfoProps) {
+  // Gunakan data dari API jika ada, jika tidak gunakan Static Fallback
+  // Kita ambil index ke-0 karena asumsi Visi Misi yang ditampilkan hanya 1
+  const activeData = visionMission.length > 0 ? visionMission[0] : STATIC_VM;
+
+  // Logic untuk memecah string Mission menjadi list (berdasarkan baris baru '\n')
+  // Pastikan input di database menggunakan 'Enter' untuk poin baru
+  const missionPoints = activeData.mission.split('\n').filter(item => item.trim() !== "");
+
   return (
     <section className="relative py-20 md:py-32 overflow-hidden bg-background">
       {/* Dekorasi Background (Subtle Gradient) */}
@@ -111,9 +133,7 @@ export default function ProgramInfo() {
                 <h3 className="text-2xl font-bold">Visi Kami</h3>
               </div>
               <p className="text-primary-foreground/90 text-lg leading-relaxed font-light">
-                Menjadi program studi Teknik Informatika terdepan dalam
-                menghasilkan profesional yang inovatif, berkarakter, dan berdaya
-                saing global
+                {activeData.vision}
               </p>
             </div>
           </div>
@@ -131,11 +151,7 @@ export default function ProgramInfo() {
                 </h3>
               </div>
               <ul className="space-y-4">
-                {[
-                  "Pendidikan berkualitas tinggi di bidang TI.",
-                  "Penelitian relevan dengan kebutuhan industri.",
-                  "Pengabdian masyarakat berbasis transfer teknologi.",
-                ].map((item, i) => (
+                {missionPoints.map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-3 text-muted-foreground"

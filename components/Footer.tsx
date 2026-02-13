@@ -59,7 +59,7 @@ export default function Footer() {
                   href="/dosen"
                   className="opacity-80 hover:opacity-100 transition-opacity"
                 >
-                  Dosen & Staf
+                  Dosen
                 </Link>
               </li>
               <li>
@@ -80,16 +80,17 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-1 shrink-0" />
                 <span className="opacity-80">
-                  Jl. Kampus No. 1, Cirebon, Indonesia
+                  Jl. Fatahillah - Watubelah No. 40, Sumber, Kabupaten Cirebon,
+                  Jawa Barat
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} />
-                <span className="opacity-80">(0231) 123-4567</span>
+                <span className="opacity-80">(0231) 209608, 209617</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} />
-                <span className="opacity-80">ti@umc.ac.id</span>
+                <span className="opacity-80">teknikinformatika@umc.ac.id</span>
               </li>
             </ul>
           </div>
