@@ -9,7 +9,7 @@ export async function getDosen(params?: {
   page?: number;
   limit?: number;
   search?: string;
-}) {
+}): Promise<DosenPagination> {
   const searchParams = new URLSearchParams();
 
   const limit = params?.limit ?? 6;
@@ -23,14 +23,15 @@ export async function getDosen(params?: {
   }
 
   const res = await fetch(`${API_URL}/dosen?${searchParams.toString()}`, {
-    next: { revalidate: 300 }, // ISR 1 jam karena data dosen jarang berubah
+    next: { revalidate: 60 }, // 1 menit
   });
 
   if (!res.ok) {
     throw new Error("Failed to fetch dosen list");
   }
 
-  return res.json() as Promise<DosenPagination>;
+  const result = await res.json();
+  return result as DosenPagination;
 }
 
 /**
@@ -38,7 +39,7 @@ export async function getDosen(params?: {
  */
 export async function getDosenDetail(id: string): Promise<Dosen | null> {
   const res = await fetch(`${API_URL}/dosen/${id}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 3600 }, // 1 jam
   });
 
   if (res.status === 404) {
@@ -50,6 +51,5 @@ export async function getDosenDetail(id: string): Promise<Dosen | null> {
   }
 
   const result = await res.json();
-
   return result.data as Dosen;
 }

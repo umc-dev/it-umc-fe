@@ -1,6 +1,5 @@
 import { getDosen } from "@/actions/dosen";
 import StaffGrid from "@/components/StaffGrid";
-// Sesuaikan path fetcher yang dibuat sebelumnya
 
 export const metadata = {
   title: "Dosen | Teknik Informatika",
@@ -9,10 +8,9 @@ export const metadata = {
 };
 
 export default async function DosenPage() {
-  // Fetch data langsung dari API backend
-  // Kita set limit agak besar (misal 50) agar semua dosen muncul,
-  // atau biarkan default (6) sesuai API awal kamu.
-  const response = await getDosen({ limit: 50 });
+  // Fetch data langsung dari API backend melalui server action
+  // Kita set limit 100 agar semua dosen muncul (sesuaikan dengan kebutuhan)
+  const response = await getDosen({ limit: 100 });
   const lecturers = response.data;
 
   return (

@@ -48,8 +48,9 @@ export default function StaffGrid({
                 <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1">
                   {member.name}
                 </h3>
-                <p className="text-sm font-medium text-accent mb-6">
-                  Dosen Program Studi
+                <p className="text-sm font-medium text-accent mb-6 line-clamp-1">
+                  {/* Pemanggilan relasi lectureship */}
+                  {member.lectureship?.name || "Dosen Program Studi"}
                 </p>
 
                 {/* Action Buttons (Link) */}

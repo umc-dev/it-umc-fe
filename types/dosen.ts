@@ -2,11 +2,15 @@ export interface Dosen {
   id: string;
   name: string;
   expertise: string;
-  photo: string;
+  photo: string | null;
   teaching: string;
   research: string;
   createdAt: string;
   updatedAt: string;
+  lectureship: {
+    id: number;
+    name: string;
+  } | null;
 }
 
 export interface DosenPagination {
