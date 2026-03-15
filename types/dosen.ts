@@ -1,3 +1,15 @@
+export interface LectureshipRef {
+  id: number;
+  name: string;
+}
+
+export interface DosenPosition {
+  id: number;
+  startDate: string;
+  endDate: string | null;
+  lectureship: LectureshipRef;
+}
+
 export interface Dosen {
   id: string;
   name: string;
@@ -7,10 +19,7 @@ export interface Dosen {
   research: string;
   createdAt: string;
   updatedAt: string;
-  lectureship: {
-    id: number;
-    name: string;
-  } | null;
+  positions: DosenPosition[];
 }
 
 export interface DosenPagination {

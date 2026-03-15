@@ -6,15 +6,15 @@ import { GraduationCap, Microscope } from "lucide-react";
 import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card";
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
-interface StaffGridProps {
+interface DosenGridProps {
   members: Dosen[];
   isLoading?: boolean;
 }
 
-export default function StaffGrid({
+export default function DosenGrid({
   members,
   isLoading = false,
-}: StaffGridProps) {
+}: DosenGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading
@@ -50,7 +50,12 @@ export default function StaffGrid({
                 </h3>
                 <p className="text-sm font-medium text-accent mb-6 line-clamp-1">
                   {/* Pemanggilan relasi lectureship */}
-                  {member.lectureship?.name || "Dosen Program Studi"}
+                  {(() => {
+                    if (!member.positions || member.positions.length === 0) return "Dosen Program Studi";
+                    const activePosition = member.positions.find((p) => !p.endDate);
+                    const latestPosition = activePosition ?? member.positions[0];
+                    return latestPosition.lectureship?.name || "Dosen Program Studi";
+                  })()}
                 </p>
 
                 {/* Action Buttons (Link) */}

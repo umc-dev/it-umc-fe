@@ -1,5 +1,5 @@
 import { getDosen } from "@/actions/dosen";
-import StaffGrid from "@/components/StaffGrid";
+import DosenGrid from "@/components/DosenGrid";
 
 export const metadata = {
   title: "Dosen | Teknik Informatika",
@@ -42,9 +42,9 @@ export default async function DosenPage() {
             </p>
           </div>
 
-          {/* Render StaffGrid dengan data dari API */}
+          {/* Render DosenGrid dengan data dari API */}
           {lecturers.length > 0 ? (
-            <StaffGrid members={lecturers} />
+            <DosenGrid members={lecturers} />
           ) : (
             <div className="text-center py-20">
               <p className="text-muted-foreground italic">
