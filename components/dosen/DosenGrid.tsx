@@ -3,7 +3,7 @@
 import type { Dosen } from "@/types/dosen";
 import Image from "next/image";
 import { GraduationCap, Microscope } from "lucide-react";
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-dosen-card";
+import { SkeletonCard } from "@/components/skeletons/skeleton-card";
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
 interface DosenGridProps {
@@ -19,7 +19,7 @@ export default function DosenGrid({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading
         ? Array.from({ length: SKELETON_COUNTS.STAFF }).map((_, i) => (
-            <SkeletonStaffCard key={i} />
+            <SkeletonCard key={i} />
           ))
         : members.map((member) => (
             <div

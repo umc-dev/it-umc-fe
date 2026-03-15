@@ -1,5 +1,5 @@
 import { getAlumni } from "@/actions/alumni";
-import AlumniGrid from "@/components/AlumniGrid";
+import AlumniGrid from "@/components/alumni/AlumniGrid";
 import { GraduationCap } from "lucide-react";
 import type { Alumni } from "@/types/alumni";
 

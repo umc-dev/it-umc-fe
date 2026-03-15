@@ -4,7 +4,7 @@ import type { Alumni } from "@/types/alumni";
 import Image from "next/image";
 import Link from "next/link";
 import { GraduationCap, PlayCircle, Quote, User } from "lucide-react";
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-dosen-card"; 
+import { SkeletonCard } from "@/components/skeletons/skeleton-card"; 
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
 interface AlumniGridProps {
@@ -20,7 +20,7 @@ export default function AlumniGrid({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading
         ? Array.from({ length: SKELETON_COUNTS.STAFF || 6 }).map((_, i) => (
-            <SkeletonStaffCard key={i} />
+            <SkeletonCard key={i} />
           ))
         : members.map((member) => (
             <div

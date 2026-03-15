@@ -21,7 +21,7 @@ export async function getPartnerships({
 
   const res = await fetch(`${API_URL}/partnerships?${params.toString()}`, {
     next: {
-      revalidate: 300, // ISR 5 menit
+      revalidate: 60, // ISR 1 menit
     },
   });
 

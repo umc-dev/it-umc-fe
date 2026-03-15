@@ -1,5 +1,5 @@
 import { getDosen } from "@/actions/dosen";
-import KaprodiGrid from "@/components/KaprodiGrid";
+import KaprodiGrid from "@/components/dosen/KaprodiGrid";
 import { Dosen, DosenPosition } from "@/types/dosen";
 
 export const metadata = {

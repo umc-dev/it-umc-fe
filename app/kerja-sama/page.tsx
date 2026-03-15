@@ -1,16 +1,16 @@
 import { Suspense } from "react";
-import PrestasiTableWrapper from "../../components/prestasi/PrestasiTableWrapper";
+import KerjaSamaTableWrapper from "@/components/kerja-sama/KerjaSamaTableWrapper";
 import { SkeletonTable } from "@/components/skeletons/skeleton-table";
 
 export const metadata = {
-  title: "Prestasi | Teknik Informatika",
+  title: "Kerja Sama | Teknik Informatika",
   description:
-    "Daftar pencapaian dan prestasi gemilang mahasiswa Teknik Informatika Universitas Muhammadiyah Cirebon.",
+    "Jejaring dan kemitraan strategis Program Studi Teknik Informatika Universitas Muhammadiyah Cirebon dengan berbagai perusahaan dan institusi.",
 };
 
 export const revalidate = 60;
 
-export default async function PrestasiPage(props: {
+export default async function KerjaSamaPage(props: {
   searchParams: Promise<{ page?: string; search?: string }>;
 }) {
   const searchParams = await props.searchParams;
@@ -22,9 +22,9 @@ export default async function PrestasiPage(props: {
       {/* Hero Section */}
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Prestasi Mahasiswa</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Kerja Sama</h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Deretan pencapaian luar biasa dan penemuan nyata yang mengharumkan nama Teknik Informatika Universitas Muhammadiyah Cirebon.
+            Jejaring dan kemitraan strategis Teknik Informatika Universitas Muhammadiyah Cirebon dengan industri, institusi, dan dunia usaha.
           </p>
         </div>
       </section>
@@ -36,18 +36,18 @@ export default async function PrestasiPage(props: {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                    Daftar Prestasi
+                    Daftar Kemitraan
                 </h2>
               </div>
               <div className="w-20 h-1.5 bg-accent rounded-full mb-4"></div>
               <p className="text-muted-foreground text-lg max-w-xl">
-                Menelusuri sejarah prestasi akademik maupun non-akademik dari mahasiswa kami.
+                Menelusuri direktori perusahaan, universitas, maupun lembaga yang berkolaborasi aktif dengan program studi.
               </p>
             </div>
           </div>
 
           <Suspense fallback={<SkeletonTable />}>
-            <PrestasiTableWrapper search={search} page={page} />
+            <KerjaSamaTableWrapper search={search} page={page} />
           </Suspense>
         </div>
       </section>

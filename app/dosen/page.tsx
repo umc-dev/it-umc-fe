@@ -1,5 +1,5 @@
 import { getDosen } from "@/actions/dosen";
-import DosenGrid from "@/components/DosenGrid";
+import DosenGrid from "@/components/dosen/DosenGrid";
 import { Dosen, DosenPosition } from "@/types/dosen";
 
 export const metadata = {
