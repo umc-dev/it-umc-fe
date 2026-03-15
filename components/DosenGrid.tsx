@@ -3,7 +3,7 @@
 import type { Dosen } from "@/types/dosen";
 import Image from "next/image";
 import { GraduationCap, Microscope } from "lucide-react";
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card";
+import { SkeletonStaffCard } from "@/components/skeletons/skeleton-dosen-card";
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
 interface DosenGridProps {

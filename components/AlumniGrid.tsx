@@ -4,7 +4,7 @@ import type { Alumni } from "@/types/alumni";
 import Image from "next/image";
 import Link from "next/link";
 import { GraduationCap, PlayCircle, Quote, User } from "lucide-react";
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card"; 
+import { SkeletonStaffCard } from "@/components/skeletons/skeleton-dosen-card"; 
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
 interface AlumniGridProps {

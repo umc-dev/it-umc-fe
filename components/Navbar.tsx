@@ -36,7 +36,7 @@ const NAV_ITEMS: NavItem[] = [
       {
         label: "Program Studi",
         href: "/akademik/program-studi",
-        description: "S1 & D3 Teknik Informatika",
+        description: "S1 Teknik Informatika",
       },
       {
         label: "UKT",
@@ -47,6 +47,11 @@ const NAV_ITEMS: NavItem[] = [
         label: "Prospek Karir",
         href: "/akademik/prospek-karir",
         description: "Peluang Karir Lulusan",
+      },
+      {
+        label: "Prestasi Mahasiswa",
+        href: "/prestasi",
+        description: "Pencapaian Mahasiswa TI",
       },
     ],
   },
