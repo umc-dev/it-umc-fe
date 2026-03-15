@@ -114,6 +114,14 @@
   }
 } */
 
+@layer components {
+  /* Ubah !important max-width ini. Default Tailwind bisa sampai 1536px yang mana terlalu lebar (biar ga terlalu mepet samping)*/
+  .container {
+    max-width: 1336px !important;
+  }
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
