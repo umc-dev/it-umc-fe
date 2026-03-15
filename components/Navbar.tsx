@@ -51,13 +51,25 @@ const NAV_ITEMS: NavItem[] = [
       {
         label: "Prestasi Mahasiswa",
         href: "/prestasi",
-        description: "Pencapaian Mahasiswa TI",
+        description: "Pencapaian Mahasiswa",
       },
     ],
   },
   {
     label: "Dosen",
-    href: "/dosen",
+    href: null,
+    children: [
+      {
+        label: "Daftar Dosen",
+        href: "/dosen",
+        description: "Staff Pengajar Teknik Informatika",
+      },
+      {
+        label: "Sejarah Kaprodi",
+        href: "/dosen/kepala-program-studi",
+        description: "Sejarah Kepala Program Studi",
+      },
+    ],
   },
   {
     label: "Alumni",

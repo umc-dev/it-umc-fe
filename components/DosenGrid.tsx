@@ -49,12 +49,22 @@ export default function DosenGrid({
                   {member.name}
                 </h3>
                 <p className="text-sm font-medium text-accent mb-6 line-clamp-1">
-                  {/* Pemanggilan relasi lectureship */}
+                  {/* Pemanggilan relasi lectureship dengan range tahun */}
                   {(() => {
-                    if (!member.positions || member.positions.length === 0) return "Dosen Program Studi";
+                    if (!member.positions || member.positions.length === 0) return "Tahun Tidak Tersedia";
                     const activePosition = member.positions.find((p) => !p.endDate);
                     const latestPosition = activePosition ?? member.positions[0];
-                    return latestPosition.lectureship?.name || "Dosen Program Studi";
+                    
+                    if (latestPosition.startDate) {
+                      const startYear = new Date(latestPosition.startDate).getFullYear();
+                      const endYear = latestPosition.endDate 
+                        ? new Date(latestPosition.endDate).getFullYear() 
+                        : "sekarang";
+                        
+                      return `${startYear} - ${endYear}`;
+                    }
+                    
+                    return "Tahun Tidak Tersedia";
                   })()}
                 </p>
 

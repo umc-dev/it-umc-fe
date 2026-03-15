@@ -1,5 +1,6 @@
 import { getDosen } from "@/actions/dosen";
 import DosenGrid from "@/components/DosenGrid";
+import { Dosen, DosenPosition } from "@/types/dosen";
 
 export const metadata = {
   title: "Dosen | Teknik Informatika",
@@ -7,11 +8,68 @@ export const metadata = {
     "Dosen-dosen berpengalaman dengan keahlian di berbagai bidang Teknologi Informasi",
 };
 
+// Helper: Get active position
+function getActivePosition(dosen: Dosen): DosenPosition | null {
+  if (!dosen.positions || dosen.positions.length === 0) return null;
+  const activePosition = dosen.positions.find((p) => !p.endDate);
+  return activePosition ?? dosen.positions[0];
+}
+
 export default async function DosenPage() {
-  // Fetch data langsung dari API backend melalui server action
-  // Kita set limit 100 agar semua dosen muncul (sesuaikan dengan kebutuhan)
   const response = await getDosen({ limit: 100 });
   const lecturers = response.data;
+
+  // Grouping logic
+  const groupedData: Record<string, Dosen[]> = {};
+
+  // Default group name if no active position
+  const defaultGroupName = "Dosen Program Studi";
+
+  lecturers.forEach((dosen) => {
+    const activePos = getActivePosition(dosen);
+    let groupName = defaultGroupName;
+
+    if (activePos) {
+      if (activePos.lectureship.name.toLowerCase() === "kepala program studi") {
+        // If the position is officially Kaprodi, we must ensure it's still ACTIVE (!endDate).
+        // If they are no longer Kaprodi, they should fall back to standard Dosen.
+        if (!activePos.endDate) {
+          groupName = activePos.lectureship.name;
+        }
+      } else {
+        // For other positions like Sekprodi, etc., just use the active name.
+        if (!activePos.endDate) {
+            groupName = activePos.lectureship.name;
+        }
+      }
+    }
+
+    if (!groupedData[groupName]) {
+      groupedData[groupName] = [];
+    }
+    groupedData[groupName].push(dosen);
+  });
+
+  // Sort groups: "Kepala Program Studi" should be first. 
+  // Others can be sorted alphabetically.
+  const groupNames = Object.keys(groupedData).sort((a, b) => {
+    if (a.toLowerCase() === "kepala program studi") return -1;
+    if (b.toLowerCase() === "kepala program studi") return 1;
+    return a.localeCompare(b);
+  });
+
+  // Sort lecturers within each group by `startDate` (ascending, oldest first)
+  groupNames.forEach((groupName) => {
+    groupedData[groupName].sort((a, b) => {
+      const posA = getActivePosition(a);
+      const posB = getActivePosition(b);
+
+      const dateA = posA ? new Date(posA.startDate).getTime() : 0;
+      const dateB = posB ? new Date(posB.startDate).getTime() : 0;
+
+      return dateA - dateB;
+    });
+  });
 
   return (
     <>
@@ -42,9 +100,19 @@ export default async function DosenPage() {
             </p>
           </div>
 
-          {/* Render DosenGrid dengan data dari API */}
           {lecturers.length > 0 ? (
-            <DosenGrid members={lecturers} />
+            <div className="space-y-16">
+              {groupNames.map((groupName) => (
+                <div key={groupName}>
+                  <div className="mb-6 border-b border-border pb-2">
+                    <h3 className="text-2xl font-bold text-primary">
+                      {groupName}
+                    </h3>
+                  </div>
+                  <DosenGrid members={groupedData[groupName]} />
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="text-center py-20">
               <p className="text-muted-foreground italic">
