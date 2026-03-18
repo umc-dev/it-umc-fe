@@ -40,8 +40,8 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-2 text-sm">
               <ul className="space-y-2">
                 <li>
-                  <Link href="/akademik/program-studi" className="opacity-80 hover:opacity-100 hover:underline transition-all">
-                    Program Studi
+                  <Link href="/akademik/distribusi-mata-kuliah" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Distribusi Mata Kuliah
                   </Link>
                 </li>
                 <li>

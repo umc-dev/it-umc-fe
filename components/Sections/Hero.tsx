@@ -93,7 +93,7 @@ export default function Hero({ stats }: HeroProps) {
             </Link>
 
             <Link
-              href="/akademik"
+              href="#program-info"
               className="inline-flex items-center justify-center px-8 py-3.5 text-base font-medium text-white transition-all bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 backdrop-blur-md shadow-lg"
             >
               <span className="flex items-center gap-2">
@@ -164,7 +164,7 @@ export default function Hero({ stats }: HeroProps) {
                   {employmentRate}
                 </p>
                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
-                  Kerja
+                  Keterserapan Kerja
                 </p>
               </div>
             </div>

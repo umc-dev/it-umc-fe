@@ -58,7 +58,7 @@ export default function ProgramInfo({ visionMission = [] }: ProgramInfoProps) {
   const missionPoints = activeData.mission.split('\n').filter(item => item.trim() !== "");
 
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden bg-background">
+    <section className="relative py-20 md:py-32 overflow-hidden bg-background" id="program-info">
       {/* Dekorasi Background (Subtle Gradient) */}
       <div className="absolute top-0 left-0 w-full h-full bg-linear-to-br from-primary/5 via-background to-accent/5 -z-10" />
 

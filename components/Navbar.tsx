@@ -34,13 +34,13 @@ const NAV_ITEMS: NavItem[] = [
     href: null,
     children: [
       {
-        label: "Program Studi",
-        href: "/akademik/program-studi",
-        description: "S1 Teknik Informatika",
+        label: "Distribusi Mata Kuliah",
+        href: "/akademik/distribusi-mata-kuliah",
+        description: "Pedoman & Struktur Pembelajaran",
       },
       {
         label: "UKT",
-        href: "/akademik/ukt",
+        href: "https://pmb.umc.ac.id/assets/pdf/biayakuliah.pdf",
         description: "Biaya Pendidikan",
       },
       {
