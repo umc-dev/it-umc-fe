@@ -108,9 +108,9 @@ export default function Hero({ stats }: HeroProps) {
       {/* --- 3. Bottom Info Bar (Dynamic Data) --- */}
       <div className="relative z-20 w-full border-t border-white/10 bg-slate-950/80 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+          <div className="grid grid-cols-3 divide-x divide-white/10">
             {/* Stat 1: Akreditasi */}
-            <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group">
+            <div className="py-6 px-2 sm:px-4 flex flex-col items-center text-center md:justify-center md:text-left gap-3 md:flex-row md:items-center md:gap-4 group">
               <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400">
                 <Award className="w-5 h-5 md:w-6 md:h-6" />
               </div>
@@ -125,7 +125,7 @@ export default function Hero({ stats }: HeroProps) {
             </div>
 
             {/* Stat 2: Mahasiswa (Dynamic) */}
-            <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group">
+            <div className="py-6 px-2 sm:px-4 flex flex-col items-center text-center md:justify-center md:text-left gap-3 md:flex-row md:items-center md:gap-4 group">
               <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
                 <GraduationCap className="w-5 h-5 md:w-6 md:h-6" />
               </div>
@@ -140,7 +140,7 @@ export default function Hero({ stats }: HeroProps) {
             </div>
 
             {/* Stat 3: Mitra (Dynamic) */}
-            <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group border-t border-white/10 md:border-t-0">
+            <div className="py-6 px-2 sm:px-4 flex flex-col items-center text-center md:justify-center md:text-left gap-3 md:flex-row md:items-center md:gap-4 group">
               <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400">
                 <Globe className="w-5 h-5 md:w-6 md:h-6" />
               </div>
@@ -150,21 +150,6 @@ export default function Hero({ stats }: HeroProps) {
                 </p>
                 <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
                   Mitra
-                </p>
-              </div>
-            </div>
-
-            {/* Stat 4: Pekerjaan */}
-            <div className="py-6 px-4 flex flex-col items-center text-center md:items-start md:text-left gap-3 md:flex-row md:gap-4 group border-t border-white/10 md:border-t-0">
-              <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400">
-                <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6" />
-              </div>
-              <div>
-                <p className="text-xl md:text-2xl font-bold text-white">
-                  {employmentRate}
-                </p>
-                <p className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">
-                  Keterserapan Kerja
                 </p>
               </div>
             </div>
