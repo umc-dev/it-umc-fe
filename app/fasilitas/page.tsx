@@ -1,14 +1,26 @@
 import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import { getFacilities } from "@/actions/facilities";
+import Pagination from "@/components/Pagination";
 
 export const metadata = {
   title: "Fasilitas | Teknik Informatika",
   description: "Fasilitas lengkap Program Studi Teknik Informatika UMCirebon",
 };
 
-export default async function FasilitasPage() {
-  const { data: facilities } = await getFacilities({ limit: 50 });
+type Props = {
+  searchParams: Promise<{
+    page?: string;
+    limit?: string;
+  }>;
+};
+
+export default async function FasilitasPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const page = Number(params?.page ?? 1);
+  const limit = Number(params?.limit ?? 9);
+
+  const { data: facilities, meta } = await getFacilities({ limit, page });
 
   return (
     <>
@@ -75,6 +87,8 @@ export default async function FasilitasPage() {
               </p>
             )}
           </div>
+          
+          <Pagination meta={meta} />
         </div>
       </section>
 

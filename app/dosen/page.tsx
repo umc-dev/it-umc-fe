@@ -1,5 +1,5 @@
 import { getDosen } from "@/actions/dosen";
-import DosenGrid from "@/components/dosen/DosenGrid";
+import DosenGroupSection from "@/components/dosen/DosenGroupSection";
 import { Dosen, DosenPosition } from "@/types/dosen";
 
 export const metadata = {
@@ -103,14 +103,11 @@ export default async function DosenPage() {
           {lecturers.length > 0 ? (
             <div className="space-y-16">
               {groupNames.map((groupName) => (
-                <div key={groupName}>
-                  <div className="mb-6 border-b border-border pb-2">
-                    <h3 className="text-2xl font-bold text-primary">
-                      {groupName}
-                    </h3>
-                  </div>
-                  <DosenGrid members={groupedData[groupName]} />
-                </div>
+                <DosenGroupSection
+                  key={groupName}
+                  groupName={groupName}
+                  members={groupedData[groupName]}
+                />
               ))}
             </div>
           ) : (
