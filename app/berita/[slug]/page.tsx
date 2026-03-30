@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import ImageModal from "@/components/ImageModal";
 import {
   ArrowLeft,
   Calendar,
@@ -93,14 +95,15 @@ export default async function NewsDetailPage({
 
         {/* 2. MAIN CONTENT LAYOUT */}
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Main Image - Menggunakan img standar untuk localhost */}
-          <div className="relative aspect-video md:aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden mb-12">
-            <img
-              src={article.thumbnail || "/images/placeholder.jpg"}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {/* Main Image */}
+          <ImageModal
+            src={article.thumbnail || "/images/placeholder.jpg"}
+            alt={article.title}
+            priority
+            unoptimized
+            wrapperClassName="relative aspect-video md:aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden mb-12"
+            imageClassName="object-cover"
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* LEFT SIDEBAR: Sticky Share */}
@@ -156,10 +159,12 @@ export default async function NewsDetailPage({
                   className="group bg-card rounded-xl border overflow-hidden hover:shadow-xl transition-all"
                 >
                   <div className="relative h-48">
-                    <img
+                    <Image
                       src={news.thumbnail}
                       alt={news.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <div className="p-5">

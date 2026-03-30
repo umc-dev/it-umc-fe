@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageModal from "@/components/ImageModal";
 import { StrukturOrganisasi } from "@/types/strukturOrganisasi";
 
 interface StrukturOrganisasiSectionProps {
@@ -22,15 +22,13 @@ export default function StrukturOrganisasiSection({ data }: StrukturOrganisasiSe
         <div className="flex flex-col gap-8 md:gap-12">
           {/* Gambar Struktur */}
           <div className="bg-slate-50 p-2 sm:p-6 rounded-2xl border border-slate-100 shadow-sm w-full">
-            <div className="relative w-full aspect-video md:aspect-16/7 lg:aspect-21/9 rounded-lg overflow-hidden flex items-center justify-center bg-white border border-slate-100 p-2">
-              <Image
-                src={data.image}
-                alt="Struktur Organisasi Teknik Informatika"
-                fill
-                className="object-contain"
-                unoptimized
-              />
-            </div>
+            <ImageModal
+               src={data.image}
+               alt="Struktur Organisasi Teknik Informatika"
+               unoptimized
+               wrapperClassName="relative w-full aspect-video md:aspect-16/7 lg:aspect-21/9 rounded-lg overflow-hidden flex items-center justify-center bg-white border border-slate-100 p-2"
+               imageClassName="object-contain"
+            />
           </div>
 
           {/* Keterangan */}
