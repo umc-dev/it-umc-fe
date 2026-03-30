@@ -1,5 +1,7 @@
 import { getDosen } from "@/actions/dosen";
+import { getStrukturOrganisasi } from "@/actions/strukturOrganisasi";
 import DosenGroupSection from "@/components/dosen/DosenGroupSection";
+import StrukturOrganisasiSection from "@/components/dosen/StrukturOrganisasiSection";
 import { Dosen, DosenPosition } from "@/types/dosen";
 
 export const metadata = {
@@ -16,8 +18,12 @@ function getActivePosition(dosen: Dosen): DosenPosition | null {
 }
 
 export default async function DosenPage() {
-  const response = await getDosen({ limit: 100 });
+  const [response, structResponse] = await Promise.all([
+    getDosen({ limit: 100 }),
+    getStrukturOrganisasi(),
+  ]);
   const lecturers = response.data;
+  const strukturData = structResponse.data;
 
   // Grouping logic
   const groupedData: Record<string, Dosen[]> = {};
@@ -83,6 +89,11 @@ export default async function DosenPage() {
           </p>
         </div>
       </section>
+
+      {/* Struktur Organisasi Section */}
+      {strukturData && (
+        <StrukturOrganisasiSection data={strukturData} />
+      )}
 
       {/* Lecturers Section */}
       <section className="py-20 bg-slate-50">
