@@ -31,13 +31,12 @@ export default function KaprodiGrid({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {historyItems.map((item, index) => {
         const { dosen, position } = item;
-        
-        // Format year range
+
         const startYear = new Date(position.startDate).getFullYear();
-        const endYear = position.endDate 
-          ? new Date(position.endDate).getFullYear() 
+        const endYear = position.endDate
+          ? new Date(position.endDate).getFullYear()
           : "sekarang";
-          
+
         const isCurrent = !position.endDate;
 
         return (
@@ -76,8 +75,9 @@ export default function KaprodiGrid({
               <h3 className="text-lg font-bold text-primary mb-1 line-clamp-2">
                 {dosen.name}
               </h3>
-              
-              <div className="mt-auto grid grid-cols-2 gap-3 pt-4 border-t border-border">
+
+              {/* Action Buttons */}
+              <div className="mt-auto grid grid-cols-2 gap-3 pb-4 border-b border-border">
                 <a
                   href={dosen.teaching}
                   target="_blank"
@@ -97,6 +97,16 @@ export default function KaprodiGrid({
                   Pengabdian
                 </a>
               </div>
+
+              {/* NIDN */}
+              {dosen.nidn && (
+                <p className="pt-3 text-center text-xs text-muted-foreground">
+                  NIDN&nbsp;
+                  <span className="font-mono font-semibold text-foreground/80 tracking-widest">
+                    {dosen.nidn}
+                  </span>
+                </p>
+              )}
             </div>
           </div>
         );

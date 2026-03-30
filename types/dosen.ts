@@ -13,6 +13,7 @@ export interface DosenPosition {
 export interface Dosen {
   id: string;
   name: string;
+  nidn: string | null;
   expertise: string;
   photo: string | null;
   teaching: string;

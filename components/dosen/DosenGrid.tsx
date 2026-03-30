@@ -48,28 +48,24 @@ export default function DosenGrid({
                 <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1">
                   {member.name}
                 </h3>
-                <p className="text-sm font-medium text-accent mb-6 line-clamp-1">
-                  {/* Pemanggilan relasi lectureship dengan range tahun */}
+                <p className="text-sm font-medium text-accent mb-4 line-clamp-1">
                   {(() => {
                     if (!member.positions || member.positions.length === 0) return "Tahun Tidak Tersedia";
                     const activePosition = member.positions.find((p) => !p.endDate);
                     const latestPosition = activePosition ?? member.positions[0];
-                    
                     if (latestPosition.startDate) {
                       const startYear = new Date(latestPosition.startDate).getFullYear();
-                      const endYear = latestPosition.endDate 
-                        ? new Date(latestPosition.endDate).getFullYear() 
+                      const endYear = latestPosition.endDate
+                        ? new Date(latestPosition.endDate).getFullYear()
                         : "sekarang";
-                        
                       return `${startYear} - ${endYear}`;
                     }
-                    
                     return "Tahun Tidak Tersedia";
                   })()}
                 </p>
 
-                {/* Action Buttons (Link) */}
-                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-border">
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-3 pb-4 border-b border-border">
                   <a
                     href={member.teaching}
                     target="_blank"
@@ -89,6 +85,16 @@ export default function DosenGrid({
                     Pengabdian
                   </a>
                 </div>
+
+                {/* NIDN */}
+                {member.nidn && (
+                  <p className="pt-3 text-center text-xs text-muted-foreground">
+                    NIDN&nbsp;
+                    <span className="font-mono font-semibold text-foreground/80 tracking-widest">
+                      {member.nidn}
+                    </span>
+                  </p>
+                )}
               </div>
             </div>
           ))}
