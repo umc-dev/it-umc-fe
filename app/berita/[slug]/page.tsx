@@ -1,14 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import ImageModal from "@/components/ImageModal";
+import ShareButtons from "@/components/berita/ShareButtons";
 import {
   ArrowLeft,
   Calendar,
   Clock,
   User,
-  Facebook,
-  Twitter,
-  Linkedin,
   Bookmark,
 } from "lucide-react";
 import { getNewsDetail, getNews } from "@/actions/news";
@@ -108,20 +106,7 @@ export default async function NewsDetailPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* LEFT SIDEBAR: Sticky Share */}
             <div className="hidden lg:block lg:col-span-1">
-              <div className="sticky top-24 flex flex-col gap-4 items-center">
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] [writing-mode:vertical-lr] py-2">
-                  Bagikan
-                </p>
-                <button className="p-3 rounded-full bg-card border hover:text-[#1877F2] transition-all">
-                  <Facebook size={20} />
-                </button>
-                <button className="p-3 rounded-full bg-card border hover:text-[#1DA1F2] transition-all">
-                  <Twitter size={20} />
-                </button>
-                <button className="p-3 rounded-full bg-card border hover:text-[#0A66C2] transition-all">
-                  <Linkedin size={20} />
-                </button>
-              </div>
+              <ShareButtons title={article.title} />
             </div>
 
             {/* CENTER: Article Content */}
@@ -131,7 +116,12 @@ export default async function NewsDetailPage({
                 <div dangerouslySetInnerHTML={{ __html: cleanContent }} />
               </article>
 
-              <div className="mt-12 pt-8 border-t border-border">
+              {/* MOBILE SHARE BUTTONS */}
+              <div className="lg:hidden mt-8 pt-6 border-t border-border overflow-x-auto pb-2">
+                <ShareButtons title={article.title} layout="horizontal" />
+              </div>
+
+              <div className="mt-8 lg:mt-12 pt-8 border-t border-border">
                 <h3 className="text-sm font-bold text-muted-foreground mb-4 uppercase tracking-wider">
                   Topik Terkait
                 </h3>
