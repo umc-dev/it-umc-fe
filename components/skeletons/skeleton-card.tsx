@@ -1,4 +1,4 @@
-export function SkeletonStaffCard() {
+export function SkeletonCard() {
   return (
     <div className="bg-white rounded-xl shadow-md border border-border overflow-hidden animate-pulse">
       <div className="w-full h-64 bg-muted"></div>

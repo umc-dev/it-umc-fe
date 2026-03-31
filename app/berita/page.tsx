@@ -23,7 +23,7 @@ export default async function AllNewsPage({ searchParams }: Props) {
   const params = await searchParams;
   const page = Number(params?.page ?? 1);
   const search = params?.search ?? "";
-  const limit = Number(params?.limit ?? 10);
+  const limit = Number(params?.limit ?? 9);
 
   const [news] = await Promise.all([getNews({ page, search, limit })]);
 

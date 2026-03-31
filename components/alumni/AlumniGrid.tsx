@@ -4,7 +4,7 @@ import type { Alumni } from "@/types/alumni";
 import Image from "next/image";
 import Link from "next/link";
 import { GraduationCap, PlayCircle, Quote, User } from "lucide-react";
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card"; 
+import { SkeletonCard } from "@/components/skeletons/skeleton-card"; 
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
 interface AlumniGridProps {
@@ -20,7 +20,7 @@ export default function AlumniGrid({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading
         ? Array.from({ length: SKELETON_COUNTS.STAFF || 6 }).map((_, i) => (
-            <SkeletonStaffCard key={i} />
+            <SkeletonCard key={i} />
           ))
         : members.map((member) => (
             <div
@@ -35,6 +35,7 @@ export default function AlumniGrid({
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  unoptimized
                 />
                 
                 {/* Overlay Gradient for Text readability */}
@@ -76,7 +77,7 @@ export default function AlumniGrid({
                       className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all shadow-sm group-hover:shadow-md"
                     >
                       <PlayCircle size={16} />
-                      Tonton Video
+                      Tonton Video Testimoni  
                     </Link>
                   ) : (
                     <div className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-medium text-muted-foreground bg-muted rounded-lg cursor-default">

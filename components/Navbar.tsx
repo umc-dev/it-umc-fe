@@ -34,13 +34,13 @@ const NAV_ITEMS: NavItem[] = [
     href: null,
     children: [
       {
-        label: "Program Studi",
-        href: "/akademik/program-studi",
-        description: "S1 & D3 Teknik Informatika",
+        label: "Distribusi Mata Kuliah",
+        href: "/akademik/distribusi-mata-kuliah",
+        description: "Pedoman & Struktur Pembelajaran",
       },
       {
         label: "UKT",
-        href: "/akademik/ukt",
+        href: "https://pmb.umc.ac.id/assets/pdf/biayakuliah.pdf",
         description: "Biaya Pendidikan",
       },
       {
@@ -48,11 +48,28 @@ const NAV_ITEMS: NavItem[] = [
         href: "/akademik/prospek-karir",
         description: "Peluang Karir Lulusan",
       },
+      {
+        label: "Prestasi Mahasiswa",
+        href: "/prestasi",
+        description: "Pencapaian Mahasiswa",
+      },
     ],
   },
   {
     label: "Dosen",
-    href: "/dosen",
+    href: null,
+    children: [
+      {
+        label: "Daftar Dosen",
+        href: "/dosen",
+        description: "Staff Pengajar Teknik Informatika",
+      },
+      {
+        label: "Sejarah Kaprodi",
+        href: "/dosen/kepala-program-studi",
+        description: "Sejarah Kepala Program Studi",
+      },
+    ],
   },
   {
     label: "Alumni",
@@ -61,6 +78,10 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "Fasilitas",
     href: "/fasilitas",
+  },
+  {
+    label: "Kerja Sama",
+    href: "/kerja-sama",
   },
   {
     label: "Pendaftaran",
@@ -112,7 +133,9 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <h1 className="font-bold text-primary text-sm sm:text-base">Teknik Informatika</h1>
+              <h1 className="font-bold text-primary text-sm sm:text-base">
+                Teknik Informatika
+              </h1>
               <p className="text-xs text-muted-foreground md:hidden lg:block">
                 Universitas Muhammadiyah Cirebon
               </p>
@@ -132,7 +155,8 @@ export default function Navbar() {
                     <button
                       className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all duration-200 font-medium
                         ${
-                          hasActiveChild(item.children) || activeDropdown === item.label
+                          hasActiveChild(item.children) ||
+                          activeDropdown === item.label
                             ? "text-accent underline underline-offset-8 decoration-accent decoration-2"
                             : "text-foreground hover:text-accent hover:underline hover:underline-offset-8 hover:decoration-accent/60"
                         }`}
@@ -161,7 +185,9 @@ export default function Navbar() {
                                 }`}
                             >
                               <div>
-                                <div className="font-medium">{subItem.label}</div>
+                                <div className="font-medium">
+                                  {subItem.label}
+                                </div>
                                 {subItem.description && (
                                   <div className="text-xs text-muted-foreground group-hover:text-accent/80">
                                     {subItem.description}
@@ -213,7 +239,8 @@ export default function Navbar() {
                         onClick={() => toggleSubmenu(item.label)}
                         className={`w-full text-left px-5 py-3.5 rounded-xl transition-all flex items-center justify-between font-medium
                           ${
-                            hasActiveChild(item.children) || activeDropdown === item.label
+                            hasActiveChild(item.children) ||
+                            activeDropdown === item.label
                               ? "bg-accent/10 text-accent"
                               : "text-foreground hover:bg-accent/5"
                           }`}
@@ -242,11 +269,15 @@ export default function Navbar() {
                                 }`}
                             >
                               <div>
-                                <div className="font-medium">{subItem.label}</div>
+                                <div className="font-medium">
+                                  {subItem.label}
+                                </div>
                                 {subItem.description && (
                                   <div
                                     className={`text-xs mt-0.5 ${
-                                      isActive(subItem.href) ? "text-white/80" : "text-muted-foreground"
+                                      isActive(subItem.href)
+                                        ? "text-white/80"
+                                        : "text-muted-foreground"
                                     }`}
                                   >
                                     {subItem.description}
@@ -269,8 +300,8 @@ export default function Navbar() {
                               ? "bg-accent text-white"
                               : "bg-accent/5 text-accent hover:bg-accent/15"
                             : isActive(item.href)
-                            ? "bg-accent text-white font-semibold"
-                            : "text-foreground hover:bg-accent/5"
+                              ? "bg-accent text-white font-semibold"
+                              : "text-foreground hover:bg-accent/5"
                         }`}
                     >
                       {item.label}

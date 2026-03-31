@@ -3,23 +3,23 @@
 import type { Dosen } from "@/types/dosen";
 import Image from "next/image";
 import { GraduationCap, Microscope } from "lucide-react";
-import { SkeletonStaffCard } from "@/components/skeletons/skeleton-staff-card";
+import { SkeletonCard } from "@/components/skeletons/skeleton-card";
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
-interface StaffGridProps {
+interface DosenGridProps {
   members: Dosen[];
   isLoading?: boolean;
 }
 
-export default function StaffGrid({
+export default function DosenGrid({
   members,
   isLoading = false,
-}: StaffGridProps) {
+}: DosenGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {isLoading
         ? Array.from({ length: SKELETON_COUNTS.STAFF }).map((_, i) => (
-            <SkeletonStaffCard key={i} />
+            <SkeletonCard key={i} />
           ))
         : members.map((member) => (
             <div
@@ -48,12 +48,24 @@ export default function StaffGrid({
                 <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1">
                   {member.name}
                 </h3>
-                <p className="text-sm font-medium text-accent mb-6">
-                  Dosen Program Studi
+                <p className="text-sm font-medium text-accent mb-4 line-clamp-1">
+                  {(() => {
+                    if (!member.positions || member.positions.length === 0) return "Tahun Tidak Tersedia";
+                    const activePosition = member.positions.find((p) => !p.endDate);
+                    const latestPosition = activePosition ?? member.positions[0];
+                    if (latestPosition.startDate) {
+                      const startYear = new Date(latestPosition.startDate).getFullYear();
+                      const endYear = latestPosition.endDate
+                        ? new Date(latestPosition.endDate).getFullYear()
+                        : "sekarang";
+                      return `${startYear} - ${endYear}`;
+                    }
+                    return "Tahun Tidak Tersedia";
+                  })()}
                 </p>
 
-                {/* Action Buttons (Link) */}
-                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-border">
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-3 pb-4 border-b border-border">
                   <a
                     href={member.teaching}
                     target="_blank"
@@ -73,6 +85,16 @@ export default function StaffGrid({
                     Pengabdian
                   </a>
                 </div>
+
+                {/* NIDN */}
+                {member.nidn && (
+                  <p className="pt-3 text-center text-xs text-muted-foreground">
+                    NIDN&nbsp;
+                    <span className="font-mono font-semibold text-foreground/80 tracking-widest">
+                      {member.nidn}
+                    </span>
+                  </p>
+                )}
               </div>
             </div>
           ))}

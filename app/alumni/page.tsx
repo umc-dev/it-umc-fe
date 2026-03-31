@@ -1,7 +1,8 @@
 import { getAlumni } from "@/actions/alumni";
-import AlumniGrid from "@/components/AlumniGrid";
+import AlumniGrid from "@/components/alumni/AlumniGrid";
 import { GraduationCap } from "lucide-react";
 import type { Alumni } from "@/types/alumni";
+import Pagination from "@/components/Pagination";
 
 export const metadata = {
   title: "Alumni | Teknik Informatika",
@@ -11,16 +12,29 @@ export const metadata = {
 
 export const revalidate = 3600;
 
-export default async function AlumniPage() {
+type Props = {
+  searchParams: Promise<{
+    page?: string;
+    limit?: string;
+  }>;
+};
+
+export default async function AlumniPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const page = Number(params?.page ?? 1);
+  const limit = Number(params?.limit ?? 9);
+
   // Inisialisasi dengan tipe array Alumni kosong
   let alumniList: Alumni[] = [];
+  let meta = { total: 0, page: 1, limit, totalPages: 0 };
 
   try {
-    const response = await getAlumni({ limit: 100 });
+    const response = await getAlumni({ limit, page });
     
     // Pastikan response data ada sebelum assignment
     if (response?.data) {
       alumniList = response.data;
+      meta = response.meta;
     }
   } catch (error) {
     console.error("Gagal mengambil data alumni:", error);
@@ -58,7 +72,10 @@ export default async function AlumniPage() {
 
           {/* Render AlumniGrid */}
           {alumniList.length > 0 ? (
-            <AlumniGrid members={alumniList} />
+            <>
+              <AlumniGrid members={alumniList} />
+              <Pagination meta={meta} />
+            </>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center bg-muted/30 rounded-3xl border border-dashed border-border">
               <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 text-muted-foreground">

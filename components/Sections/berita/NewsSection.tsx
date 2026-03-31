@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import type { News } from "@/types/news";
-import type { Category } from "@/types/category";
 import NewsCard from "./NewsCard";
+import Pagination from "@/components/Pagination";
 
 type Props = {
   items: News[];
@@ -75,44 +75,7 @@ export default function NewsSection({ items, search, meta }: Props) {
         )}
       </div>
 
-      {meta.totalPages > 1 && (
-        <div className="mt-12 flex justify-center items-center gap-2">
-          <button
-            onClick={() => updateParams("page", (meta.page - 1).toString())}
-            disabled={meta.page <= 1}
-            className="p-2 rounded-lg border bg-card disabled:opacity-30 hover:bg-accent transition-all"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-
-          <div className="flex gap-2">
-            {[...Array(meta.totalPages)].map((_, i) => {
-              const pageNum = i + 1;
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => updateParams("page", pageNum.toString())}
-                  className={`w-10 h-10 rounded-lg border font-medium transition-all ${
-                    meta.page === pageNum
-                      ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                      : "bg-card hover:bg-accent"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-          </div>
-
-          <button
-            onClick={() => updateParams("page", (meta.page + 1).toString())}
-            disabled={meta.page >= meta.totalPages}
-            className="p-2 rounded-lg border bg-card disabled:opacity-30 hover:bg-accent transition-all"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-      )}
+      <Pagination meta={meta} />
     </section>
   );
 }

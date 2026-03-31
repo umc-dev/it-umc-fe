@@ -1,12 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
+import ImageModal from "@/components/ImageModal";
+import ShareButtons from "@/components/berita/ShareButtons";
 import {
   ArrowLeft,
   Calendar,
   Clock,
   User,
-  Facebook,
-  Twitter,
-  Linkedin,
   Bookmark,
 } from "lucide-react";
 import { getNewsDetail, getNews } from "@/actions/news";
@@ -93,32 +93,20 @@ export default async function NewsDetailPage({
 
         {/* 2. MAIN CONTENT LAYOUT */}
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* Main Image - Menggunakan img standar untuk localhost */}
-          <div className="relative aspect-video md:aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden mb-12">
-            <img
-              src={article.thumbnail || "/images/placeholder.jpg"}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {/* Main Image */}
+          <ImageModal
+            src={article.thumbnail || "/images/placeholder.jpg"}
+            alt={article.title}
+            priority
+            unoptimized
+            wrapperClassName="relative aspect-video md:aspect-21/9 w-full rounded-2xl md:rounded-3xl overflow-hidden mb-12"
+            imageClassName="object-cover"
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* LEFT SIDEBAR: Sticky Share */}
             <div className="hidden lg:block lg:col-span-1">
-              <div className="sticky top-24 flex flex-col gap-4 items-center">
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] [writing-mode:vertical-lr] py-2">
-                  Bagikan
-                </p>
-                <button className="p-3 rounded-full bg-card border hover:text-[#1877F2] transition-all">
-                  <Facebook size={20} />
-                </button>
-                <button className="p-3 rounded-full bg-card border hover:text-[#1DA1F2] transition-all">
-                  <Twitter size={20} />
-                </button>
-                <button className="p-3 rounded-full bg-card border hover:text-[#0A66C2] transition-all">
-                  <Linkedin size={20} />
-                </button>
-              </div>
+              <ShareButtons title={article.title} />
             </div>
 
             {/* CENTER: Article Content */}
@@ -128,7 +116,12 @@ export default async function NewsDetailPage({
                 <div dangerouslySetInnerHTML={{ __html: cleanContent }} />
               </article>
 
-              <div className="mt-12 pt-8 border-t border-border">
+              {/* MOBILE SHARE BUTTONS */}
+              <div className="lg:hidden mt-8 pt-6 border-t border-border overflow-x-auto pb-2">
+                <ShareButtons title={article.title} layout="horizontal" />
+              </div>
+
+              <div className="mt-8 lg:mt-12 pt-8 border-t border-border">
                 <h3 className="text-sm font-bold text-muted-foreground mb-4 uppercase tracking-wider">
                   Topik Terkait
                 </h3>
@@ -156,10 +149,12 @@ export default async function NewsDetailPage({
                   className="group bg-card rounded-xl border overflow-hidden hover:shadow-xl transition-all"
                 >
                   <div className="relative h-48">
-                    <img
+                    <Image
                       src={news.thumbnail}
                       alt={news.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <div className="p-5">

@@ -1,25 +1,25 @@
-import { PaginatedPartnershipResponse } from "@/types/partnership";
+import { PaginatedFacilityResponse } from "@/types/facility";
 
 const API_URL = process.env.API_URL!;
 
-interface GetPartnershipParams {
+interface GetFacilityParams {
   limit?: number;
   page?: number;
   search?: string;
 }
 
-export async function getPartnerships({
-  limit = 10,
+export async function getFacilities({
+  limit = 25,
   page = 1,
   search = "",
-}: GetPartnershipParams = {}): Promise<PaginatedPartnershipResponse> {
+}: GetFacilityParams = {}): Promise<PaginatedFacilityResponse> {
   const params = new URLSearchParams({
     limit: String(limit),
     page: String(page),
     search,
   });
 
-  const res = await fetch(`${API_URL}/partnerships?${params.toString()}`, {
+  const res = await fetch(`${API_URL}/facilities?${params.toString()}`, {
     next: {
       revalidate: 60, // ISR 1 menit
     },
