@@ -1,6 +1,6 @@
 # IT-UMC Frontend
 
-Website publik Program Studi Teknik Informatika, Universitas Muhammadiyah Cirebon. Konten dikelola melalui [it-umc-dashboard](../it-umc-dashboard/).
+Website publik Program Studi Teknik Informatika, Universitas Muhammadiyah Cirebon. Konten dikelola melalui [it-umc-dashboard](https://github.com/umc-dev/it-umc-dashboard).
 
 ## Tech Stack
 
