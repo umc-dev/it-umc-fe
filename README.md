@@ -41,6 +41,15 @@ Tersedia juga **AI Chatbot** di setiap halaman (RAG-based).
 
 ### Setup
 
+**1. Clone Repository**
+
+```bash
+git clone https://github.com/umc-dev/it-umc-fe.git
+cd it-umc-fe
+```
+
+**2. Install Dependencies**
+
 ```bash
 npm install
 ```
