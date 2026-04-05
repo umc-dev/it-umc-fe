@@ -53,29 +53,31 @@ export default function PdfViewer({ pdfUrl }: PdfViewerProps) {
 
       {/* Kontrol Navigasi */}
       {numPages && (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 w-full max-w-md mx-auto">
           <button
             onClick={goToPrev}
             disabled={pageNumber <= 1}
-            className="flex items-center gap-1 px-4 py-2 bg-[#0f2c4b] text-white rounded-lg
-                       disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#1a4a7a] transition-colors"
+            className="flex items-center justify-center gap-1 px-3 py-2 sm:px-4 sm:py-2 bg-primary text-primary-foreground rounded-lg
+                       disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-all text-sm sm:text-base min-w-[44px] sm:min-w-0"
+            aria-label="Halaman Sebelumnya"
           >
-            <ChevronLeft size={16} />
-            Sebelumnya
+            <ChevronLeft size={18} />
+            <span className="hidden min-[440px]:inline">Sebelumnya</span>
           </button>
 
-          <span className="text-sm font-medium text-gray-700 min-w-[120px] text-center">
-            Halaman {pageNumber} dari {numPages}
-          </span>
+          <div className="flex items-center justify-center px-3 py-1.5 bg-muted border border-border rounded-full text-[11px] sm:text-sm font-semibold text-muted-foreground min-w-[80px] sm:min-w-[120px] whitespace-nowrap">
+            {pageNumber} <span className="mx-1 text-gray-400">/</span> {numPages}
+          </div>
 
           <button
             onClick={goToNext}
             disabled={pageNumber >= numPages}
-            className="flex items-center gap-1 px-4 py-2 bg-[#0f2c4b] text-white rounded-lg
-                       disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#1a4a7a] transition-colors"
+            className="flex items-center justify-center gap-1 px-3 py-2 sm:px-4 sm:py-2 bg-primary text-primary-foreground rounded-lg
+                       disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-all text-sm sm:text-base min-w-[44px] sm:min-w-0"
+            aria-label="Halaman Selanjutnya"
           >
-            Selanjutnya
-            <ChevronRight size={16} />
+            <span className="hidden min-[440px]:inline">Selanjutnya</span>
+            <ChevronRight size={18} />
           </button>
         </div>
       )}
