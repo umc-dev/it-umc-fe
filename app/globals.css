@@ -129,6 +129,42 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Fix horizontal overflow pada konten prose (artikel berita) */
+  .prose {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    overflow-x: hidden;
+  }
+
+  .prose img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .prose pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .prose iframe,
+  .prose video,
+  .prose embed,
+  .prose object {
+    max-width: 100% !important;
+  }
+
+  .prose a {
+    word-break: break-all;
+  }
 }
 
 @keyframes scroll {
