@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IT-UMC Frontend
 
-## Getting Started
+Website publik Program Studi Teknik Informatika, Universitas Muhammadiyah Cirebon. Konten dikelola melalui [it-umc-dashboard](https://github.com/umc-dev/it-umc-dashboard).
 
-First, run the development server:
+## Tech Stack
+
+- **Next.js 16** (App Router, Server Components) + **React 19** + **TypeScript**
+- **Tailwind CSS 4** — styling
+- **Embla Carousel** — slider/carousel
+- **Recharts** — chart statistik mahasiswa
+- **React Markdown + remark-gfm** — render konten markdown
+- **React PDF** — PDF viewer
+- **date-fns** — format tanggal
+
+## Halaman
+
+| Route | Deskripsi |
+|---|---|
+| `/` | Landing page (hero, visi misi, statistik, testimoni alumni, berita terbaru, mitra) |
+| `/berita` | Daftar berita dengan pagination |
+| `/berita/[slug]` | Detail berita + share buttons |
+| `/kategori/[slug]` | Berita berdasarkan kategori |
+| `/dosen` | Profil dosen (grid) + struktur organisasi |
+| `/dosen/kepala-program-studi` | Profil Kepala Prodi |
+| `/akademik/distribusi-mata-kuliah` | Tabel kurikulum per semester |
+| `/akademik/prospek-karir` | Prospek karir lulusan |
+| `/akademik/ukt` | Link eksternal dokumen biaya pendidikan (PMB) |
+| `/fasilitas` | Galeri fasilitas kampus |
+| `/alumni` | Profil & testimoni alumni |
+| `/prestasi` | Tabel prestasi |
+| `/kerja-sama` | Tabel mitra kerja sama |
+
+Tersedia juga **AI Chatbot** di setiap halaman (RAG-based).
+
+## Menjalankan Project
+
+### Prasyarat
+
+- Node.js ≥ 18
+- Backend API (`it-umc-be`) berjalan di `http://localhost:9090`
+
+### Setup
+
+**1. Clone Repository**
+
+```bash
+git clone https://github.com/umc-dev/it-umc-fe.git
+cd it-umc-fe
+```
+
+**2. Install Dependencies**
+
+```bash
+npm install
+```
+
+Buat file `.env`:
+
+```env
+API_URL="http://localhost:9090/api/v1"
+```
+
+> `API_URL` tanpa prefix `NEXT_PUBLIC_` karena hanya diakses via Server Components/Actions.
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Struktur Folder
 
-## Learn More
+```
+app/                            # Pages (App Router)
+├── berita/                     # Berita list + detail
+├── dosen/                      # Profil dosen + Kaprodi
+├── akademik/                   # Mata kuliah, prospek karir, UKT (Link Eksternal)
+├── fasilitas/                  # Fasilitas kampus
+├── alumni/                     # Alumni & testimoni
+├── prestasi/                   # Prestasi
+├── kerja-sama/                 # Kerja sama
+└── kategori/                   # Berita per kategori
+actions/                        # Server Actions (fetch data dari API)
+components/
+├── Navbar.tsx                  # Navigation bar
+├── Footer.tsx                  # Footer
+├── Chatbot.tsx                 # AI chatbot (RAG)
+├── Sections/                   # Komponen landing page
+├── dosen/                      # Komponen halaman dosen
+├── berita/                     # Share buttons
+├── alumni/                     # Grid alumni
+└── skeletons/                  # Loading skeletons
+hooks/                          # Custom hooks
+lib/                            # Utilities
+types/                          # TypeScript type definitions
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Arsitektur
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+Backend API ──► Server Actions ──► Server Components ──► Client Components
+(it-umc-be)    (actions/*.ts)     (app/**/page.tsx)     (components/*.tsx)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Semua data fetching dilakukan server-side. Client components menerima data via props.

@@ -110,7 +110,7 @@ export default async function NewsDetailPage({
             </div>
 
             {/* CENTER: Article Content */}
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-8 overflow-hidden">
               {/* WYSIWYG Content Rendering */}
               <article className="prose prose-slate max-w-none lg:prose-xl">
                 <div dangerouslySetInnerHTML={{ __html: cleanContent }} />
