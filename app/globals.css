@@ -121,7 +121,6 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -206,13 +205,21 @@
 }
 
 @keyframes chatbot-backdrop-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes chatbot-backdrop-out {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .chatbot-enter {
@@ -245,4 +252,70 @@
 
 .message-bubble {
   animation: message-appear 0.3s ease-out forwards;
+}
+
+/* ===== Google Translate ===== */
+
+body {
+  top: 0 !important;
+}
+
+.goog-te-banner-frame,
+.goog-logo-link,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-text-highlight {
+  display: none !important;
+}
+
+.skiptranslate iframe {
+  visibility: hidden !important;
+}
+
+.google-translate-host {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  border-radius: 999px !important;
+  background: #fff;
+  padding: 0.15rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.lang-switcher button {
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-switcher button:hover {
+  color: var(--foreground);
+}
+
+.lang-switcher button.is-active {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+@media (max-width: 767px) {
+  .lang-switcher button {
+    font-size: 0.7rem;
+    padding: 0.22rem 0.42rem;
+  }
 }

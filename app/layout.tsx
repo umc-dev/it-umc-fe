@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Program Studi Teknik Informatika - Universitas Muhammadiyah Cirebon",
-  description: "Website resmi Program Studi Teknik Informatika Universitas Muhammadiyah Cirebon",
+  description:
+    "Website resmi Program Studi Teknik Informatika Universitas Muhammadiyah Cirebon",
 };
 
 export default function RootLayout({
