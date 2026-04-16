@@ -109,8 +109,7 @@ export default function Chatbot() {
       {!isOpen && !isClosing && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:shadow-2xl hover:bg-primary/90 flex items-center justify-center transition-all duration-300 z-50 hover:scale-105"
-          style={{ animation: "bounce 2s infinite" }}
+          className="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg hover:shadow-2xl hover:bg-primary/90 flex items-center justify-center transition-all duration-300 z-40 hover:scale-105"
           aria-label="Tanya AI Teknik Informatika UMC"
         >
           <MessageSquare size={28} />
@@ -120,14 +119,14 @@ export default function Chatbot() {
       {/* Backdrop overlay — hanya tampil saat fullscreen */}
       {(isOpen || isClosing) && isFullScreen && (
         <div
-          className={`fixed inset-0 bg-black/30 z-40 ${isClosing ? "chatbot-backdrop-exit" : "chatbot-backdrop-enter"}`}
+          className={`fixed inset-0 bg-black/30 z-60 ${isClosing ? "chatbot-backdrop-exit" : "chatbot-backdrop-enter"}`}
         />
       )}
 
       {/* Chat Panel — selalu ada di DOM saat open, dikontrol via animasi */}
       {(isOpen || isClosing) && (
         <div
-          className={`fixed z-50 bg-white flex flex-col shadow-2xl transition-all duration-300 ease-in-out overflow-hidden
+          className={`fixed z-70 bg-white flex flex-col shadow-2xl transition-all duration-300 ease-in-out overflow-hidden
             ${isClosing ? "chatbot-exit" : "chatbot-enter"}
             ${isFullScreen
               ? "inset-0 w-full h-full rounded-none"
