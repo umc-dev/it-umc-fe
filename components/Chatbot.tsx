@@ -149,7 +149,7 @@ export default function Chatbot() {
                 <Bot size={22} className="text-white" />
               </div>
               <div>
-                <h3 className="font-bold text-[15px] tracking-wide">TI UMC Assistant</h3>
+                <h3 className="font-bold text-[15px] tracking-wide">Teknik Informatika Assistant</h3>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
                   <p className="text-xs text-white/90">Online & Siap Membantu</p>
