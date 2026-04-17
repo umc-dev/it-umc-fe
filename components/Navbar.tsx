@@ -144,7 +144,7 @@ export default function Navbar() {
           </Link>
 
           {/* --- DESKTOP MENU --- */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <div key={item.label}>
                 {item.children ? (
@@ -154,7 +154,7 @@ export default function Navbar() {
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <button
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all duration-200 font-medium
+                      className={`flex items-center gap-1 px-2 py-1.5 rounded-lg transition-all duration-200 font-medium text-sm
                         ${
                           hasActiveChild(item.children) ||
                           activeDropdown === item.label
@@ -204,7 +204,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href || "#"}
-                    className={`px-3 py-2 rounded-lg font-medium transition-all duration-200
+                    className={`px-2 py-1.5 rounded-lg font-medium text-sm transition-all duration-200
                       ${
                         isActive(item.href)
                           ? "text-accent underline underline-offset-8 decoration-accent decoration-2 font-semibold"
@@ -219,7 +219,9 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <LanguageSwitcher />
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
 
             {/* --- MOBILE MENU BUTTON --- */}
             <button
@@ -314,6 +316,14 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
+
+              {/* --- Language Switcher (Mobile Only) --- */}
+              <div className="border-t border-border mt-3 pt-4 px-5 flex items-center justify-between">
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                  Bahasa
+                </p>
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
         )}
