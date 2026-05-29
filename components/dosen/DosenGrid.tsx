@@ -2,7 +2,8 @@
 
 import type { Dosen } from "@/types/dosen";
 import Image from "next/image";
-import { GraduationCap, Microscope } from "lucide-react";
+import Link from "next/link";
+import { GraduationCap, Microscope, Sparkles } from "lucide-react";
 import { SkeletonCard } from "@/components/skeletons/skeleton-card";
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
@@ -22,9 +23,10 @@ export default function DosenGrid({
             <SkeletonCard key={i} />
           ))
         : members.map((member) => (
-            <div
+            <Link
               key={member.id}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-border hover:border-accent group"
+              href={`/dosen/${member.id}`}
+              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-border hover:border-accent group flex flex-col cursor-pointer"
             >
               <div className="relative w-full aspect-4/5 bg-muted overflow-hidden">
                 <Image
@@ -44,8 +46,8 @@ export default function DosenGrid({
               </div>
 
               {/* Content Section */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1">
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-lg font-bold text-primary mb-1 line-clamp-1 group-hover:text-accent transition-colors">
                   {member.name}
                 </h3>
                 <p className="text-sm font-medium text-accent mb-4 line-clamp-1">
@@ -65,30 +67,40 @@ export default function DosenGrid({
                 </p>
 
                 {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-3 pb-4 border-b border-border">
-                  <a
-                    href={member.teaching}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-accent hover:text-white transition-all shadow-sm"
+                <div className="space-y-2.5 pb-4 border-b border-border mb-3" onClick={(e) => e.stopPropagation()}>
+                  <Link
+                    href={`/dosen/${member.id}`}
+                    className="w-full flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-bold bg-primary text-white rounded-lg hover:bg-accent transition-all shadow-sm hover:scale-[1.02] cursor-pointer"
                   >
-                    <GraduationCap size={14} />
-                    Pengajaran
-                  </a>
-                  <a
-                    href={member.research}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-accent hover:text-white transition-all shadow-sm"
-                  >
-                    <Microscope size={14} />
-                    Pengabdian
-                  </a>
+                    <Sparkles size={14} />
+                    Detail & Tridharma
+                  </Link>
+                  
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href={member.teaching}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1.5 px-2 py-2 text-[10px] font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-all shadow-sm"
+                    >
+                      <GraduationCap size={12} />
+                      Buku Ajar
+                    </a>
+                    <a
+                      href={member.research}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1.5 px-2 py-2 text-[10px] font-semibold bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-all shadow-sm"
+                    >
+                      <Microscope size={12} />
+                      Riset
+                    </a>
+                  </div>
                 </div>
 
                 {/* NIDN */}
                 {member.nidn && (
-                  <p className="pt-3 text-center text-xs text-muted-foreground">
+                  <p className="mt-auto text-center text-xs text-muted-foreground pt-1">
                     NIDN&nbsp;
                     <span className="font-mono font-semibold text-foreground/80 tracking-widest">
                       {member.nidn}
@@ -96,7 +108,7 @@ export default function DosenGrid({
                   </p>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
     </div>
   );

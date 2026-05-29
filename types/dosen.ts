@@ -21,6 +21,19 @@ export interface Dosen {
   createdAt: string;
   updatedAt: string;
   positions: DosenPosition[];
+  dosenTridharmas?: DosenTridharma[];
+}
+
+export interface DosenTridharma {
+  id: number;
+  dosenId: string;
+  category: "PENGAJARAN" | "PENELITIAN" | "PENGABDIAN";
+  title: string;
+  year: number;
+  description: string;
+  link: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface DosenPagination {
