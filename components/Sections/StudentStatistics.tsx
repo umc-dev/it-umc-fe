@@ -82,11 +82,23 @@ export default function StudentStatistics({ data = [] }: StudentStatisticsProps)
       };
     }
 
-    // Urutkan data berdasarkan tahun
-    const sortedData = [...data].sort((a, b) => a.year - b.year);
+    // Kelompokkan & jumlahkan (aggregate) data berdasarkan tahun agar kunci (key) selalu unik saat S1 & D3 digabungkan
+    const yearlyMap = new Map<number, { enteredStudents: number; graduatedStudents: number }>();
+
+    data.forEach((item) => {
+      const existing = yearlyMap.get(item.year) || { enteredStudents: 0, graduatedStudents: 0 };
+      yearlyMap.set(item.year, {
+        enteredStudents: existing.enteredStudents + item.enteredStudents,
+        graduatedStudents: existing.graduatedStudents + item.graduatedStudents,
+      });
+    });
+
+    const aggregatedData = Array.from(yearlyMap.entries())
+      .map(([year, stats]) => ({ year, ...stats }))
+      .sort((a, b) => a.year - b.year);
 
     // Proses data menggunakan reduce untuk immutability
-    const result = sortedData.reduce((acc, item) => {
+    const result = aggregatedData.reduce((acc, item) => {
       const newRunningTotal = acc.runningTotal + item.enteredStudents - item.graduatedStudents;
       const newTotalGraduates = acc.totalGraduates + item.graduatedStudents;
       const newTotalEntered = acc.totalEntered + item.enteredStudents;

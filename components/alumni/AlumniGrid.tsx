@@ -45,7 +45,7 @@ export default function AlumniGrid({
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
                   <span className="bg-primary/90 text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
                     <GraduationCap size={12} />
-                    Angkatan {member.year}
+                    Lulusan Tahun {member.year}
                   </span>
                 </div>
               </div>

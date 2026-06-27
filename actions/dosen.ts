@@ -9,6 +9,7 @@ export async function getDosen(params?: {
   page?: number;
   limit?: number;
   search?: string;
+  prodi?: "S1" | "D3";
 }): Promise<DosenPagination> {
   const searchParams = new URLSearchParams();
 
@@ -20,6 +21,10 @@ export async function getDosen(params?: {
 
   if (params?.search) {
     searchParams.set("search", params.search);
+  }
+
+  if (params?.prodi) {
+    searchParams.set("prodi", params.prodi);
   }
 
   const res = await fetch(`${API_URL}/dosen?${searchParams.toString()}`, {

@@ -4,6 +4,7 @@ export interface Achievement {
   achievementName: string;
   link: string;
   achievedAt: string;
+  prodi?: "S1" | "D3";
   createdAt: string;
   updatedAt: string;
 }

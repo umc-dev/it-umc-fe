@@ -2,6 +2,7 @@ export interface VisionMission {
   id: number;
   vision: string;
   mission: string;
+  prodi?: "S1" | "D3";
   createdAt: string;
   updatedAt: string;
 }

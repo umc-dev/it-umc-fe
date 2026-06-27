@@ -37,38 +37,68 @@ export default function Footer() {
         {/* Quick Links */}
           <div className="md:col-span-2">
             <h4 className="font-semibold mb-4">Navigasi Singkat</h4>
-            <div className="grid grid-cols-2 gap-2 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
               <ul className="space-y-2">
+                <li className="font-semibold text-accent/90">Program S1</li>
                 <li>
-                  <Link href="/akademik/distribusi-mata-kuliah" className="opacity-80 hover:opacity-100 hover:underline transition-all">
-                    Distribusi Mata Kuliah
+                  <Link href="/s1" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Profil
                   </Link>
                 </li>
+                <li>
+                  <Link href="/s1/akademik/distribusi-mata-kuliah" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Kurikulum
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/s1/dosen" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Dosen
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/s1/prestasi" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Prestasi
+                  </Link>
+                </li>
+              </ul>
+              <ul className="space-y-2">
+                <li className="font-semibold text-accent/90">Program D3</li>
+                <li>
+                  <Link href="/d3" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Profil
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/d3/akademik/distribusi-mata-kuliah" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Kurikulum
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/d3/dosen" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Dosen
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/d3/prestasi" className="opacity-80 hover:opacity-100 hover:underline transition-all">
+                    Prestasi
+                  </Link>
+                </li>
+              </ul>
+              <ul className="space-y-2">
+                <li className="font-semibold text-accent/90">Informasi Umum</li>
                 <li>
                   <Link href="/berita" className="opacity-80 hover:opacity-100 hover:underline transition-all">
                     Berita & Pengumuman
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dosen" className="opacity-80 hover:opacity-100 hover:underline transition-all">
-                    Daftar Dosen
-                  </Link>
-                </li>
-                <li>
                   <Link href="/fasilitas" className="opacity-80 hover:opacity-100 hover:underline transition-all">
-                    Fasilitas
-                  </Link>
-                </li>
-              </ul>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/prestasi" className="opacity-80 hover:opacity-100 hover:underline transition-all">
-                    Prestasi Mahasiswa
+                    Fasilitas Kampus
                   </Link>
                 </li>
                 <li>
                   <Link href="/kerja-sama" className="opacity-80 hover:opacity-100 hover:underline transition-all">
-                    Kerja Sama Mitra
+                    Kerja Sama
                   </Link>
                 </li>
                 <li>
@@ -77,8 +107,8 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://pmb.umc.ac.id" target="_blank" className="opacity-80 hover:opacity-100 hover:underline transition-all font-semibold">
-                    Penerimaan Mahasiswa baru
+                  <Link href="https://pmb.umc.ac.id" target="_blank" className="opacity-90 text-accent font-bold hover:underline transition-all">
+                    Daftar PMB
                   </Link>
                 </li>
               </ul>

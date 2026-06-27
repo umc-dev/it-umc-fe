@@ -1,6 +1,7 @@
 export interface Study {
   id: number;
   source: string;
+  prodi?: "S1" | "D3";
   createdAt: string;
   updatedAt: string;
 }
