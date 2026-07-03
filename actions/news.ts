@@ -10,6 +10,7 @@ export async function getNews(params?: {
   page?: number;
   limit?: number;
   search?: string;
+  category?: string;
 }) {
   const searchParams = new URLSearchParams();
 
@@ -21,6 +22,10 @@ export async function getNews(params?: {
 
   if (params?.search) {
     searchParams.set("search", params.search);
+  }
+
+  if (params?.category) {
+    searchParams.set("category", params.category);
   }
 
   const res = await fetch(`${API_URL}/news?${searchParams.toString()}`, {

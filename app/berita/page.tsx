@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import NewsSection from "@/components/Sections/berita/NewsSection";
 import { getNews } from "@/actions/news";
+import { getCategories } from "@/actions/category";
 import { Suspense } from "react";
 import NewsSkeleton from "@/components/Sections/berita/NewsSkeleton";
 
@@ -23,9 +24,13 @@ export default async function AllNewsPage({ searchParams }: Props) {
   const params = await searchParams;
   const page = Number(params?.page ?? 1);
   const search = params?.search ?? "";
+  const category = params?.category ?? "";
   const limit = Number(params?.limit ?? 9);
 
-  const [news] = await Promise.all([getNews({ page, search, limit })]);
+  const [news, categoriesData] = await Promise.all([
+    getNews({ page, search, limit, category }),
+    getCategories({ limit: 100 }),
+  ]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -43,14 +48,20 @@ export default async function AllNewsPage({ searchParams }: Props) {
 
         {/* News Grid */}
         <Suspense
-          key={`${search}-${page}-${limit}`}
+          key={`${search}-${page}-${limit}-${category}`}
           fallback={
             <div className="container mx-auto px-4 py-16">
               <NewsSkeleton />
             </div>
           }
         >
-          <NewsSection items={news.data} search={search} meta={news.meta} />
+          <NewsSection 
+            items={news.data} 
+            search={search} 
+            meta={news.meta} 
+            categories={categoriesData.data}
+            currentCategory={category}
+          />
         </Suspense>
       </main>
     </div>
