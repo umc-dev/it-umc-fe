@@ -56,7 +56,7 @@ export default function AlumniGrid({
                   {member.name}
                 </h3>
                 <p className="text-sm font-medium text-accent mb-4">
-                  Alumni Teknik Informatika
+                  Alumni {member.prodi === "D3" ? "D3 Teknik Informatika" : "S1 Teknik Informatika"}
                 </p>
 
                 {/* Testimonial Snippet */}

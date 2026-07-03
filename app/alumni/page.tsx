@@ -3,6 +3,7 @@ import AlumniGrid from "@/components/alumni/AlumniGrid";
 import { GraduationCap } from "lucide-react";
 import type { Alumni } from "@/types/alumni";
 import Pagination from "@/components/Pagination";
+import Link from "next/link";
 
 export const metadata = {
   title: "Alumni | Teknik Informatika",
@@ -16,6 +17,7 @@ type Props = {
   searchParams: Promise<{
     page?: string;
     limit?: string;
+    prodi?: string;
   }>;
 };
 
@@ -23,13 +25,14 @@ export default async function AlumniPage({ searchParams }: Props) {
   const params = await searchParams;
   const page = Number(params?.page ?? 1);
   const limit = Number(params?.limit ?? 9);
+  const prodi = params?.prodi?.toUpperCase() as "S1" | "D3" | undefined;
 
   // Inisialisasi dengan tipe array Alumni kosong
   let alumniList: Alumni[] = [];
   let meta = { total: 0, page: 1, limit, totalPages: 0 };
 
   try {
-    const response = await getAlumni({ limit, page });
+    const response = await getAlumni({ limit, page, prodi });
     
     // Pastikan response data ada sebelum assignment
     if (response?.data) {
@@ -67,6 +70,40 @@ export default async function AlumniPage({ searchParams }: Props) {
               <p className="text-muted-foreground text-lg max-w-xl">
                 Menampilkan {alumniList.length} profil alumni beserta testimoni dan kisah perjalanan karir mereka.
               </p>
+            </div>
+            
+            {/* Filter Prodi Tabs */}
+            <div className="flex bg-muted/60 p-1.5 rounded-2xl border border-border shadow-xs self-start md:self-end">
+              <Link
+                href="/alumni"
+                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
+                  !prodi
+                    ? "bg-white text-primary shadow-md border border-border/10"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Semua
+              </Link>
+              <Link
+                href="/alumni?prodi=s1"
+                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
+                  prodi === "S1"
+                    ? "bg-white text-primary shadow-md border border-border/10"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                S1
+              </Link>
+              <Link
+                href="/alumni?prodi=d3"
+                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
+                  prodi === "D3"
+                    ? "bg-white text-primary shadow-md border border-border/10"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                D3
+              </Link>
             </div>
           </div>
 

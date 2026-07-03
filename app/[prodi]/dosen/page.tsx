@@ -68,7 +68,7 @@ export default async function DosenPage({ params }: PageProps) {
 
   const [response, structResponse] = await Promise.all([
     getDosen({ limit: 100, prodi: prodiUpper as "S1" | "D3" }),
-    getStrukturOrganisasi(),
+    getStrukturOrganisasi(prodiUpper),
   ]);
   const lecturers = response.data || [];
   const strukturData = structResponse.data;

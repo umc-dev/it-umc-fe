@@ -6,18 +6,24 @@ interface GetAlumniParams {
   limit?: number;
   page?: number;
   search?: string;
+  prodi?: string;
 }
 
 export async function getAlumni({
   limit = 6,
   page = 1,
   search = "",
+  prodi,
 }: GetAlumniParams = {}): Promise<PaginatedAlumniResponse> {
   const params = new URLSearchParams({
     limit: String(limit),
     page: String(page),
     search,
   });
+
+  if (prodi) {
+    params.append("prodi", prodi);
+  }
 
   try {
     const res = await fetch(`${API_URL}/alumni?${params.toString()}`, {

@@ -155,7 +155,7 @@ export default function AlumniTestimonials({ alumni = [] }: AlumniTestimonialsPr
                         </h4>
                         <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                           <GraduationCap className="h-3.5 w-3.5 text-primary" />
-                          Lulusan Tahun {item.year}
+                          {item.prodi === "D3" ? "D3" : "S1"} • Lulusan {item.year}
                         </div>
                       </div>
                       <Quote className="h-8 w-8 text-primary/10 rotate-180" />
