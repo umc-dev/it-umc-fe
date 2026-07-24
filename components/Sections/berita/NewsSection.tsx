@@ -98,7 +98,16 @@ export default function NewsSection({ items, search, meta, categories = [], curr
         ) : (
           <div className="text-center py-20 border border-dashed rounded-2xl">
             <Search className="mx-auto mb-4 h-8 w-8 text-muted-foreground" />
-            <p className="font-semibold">Artikel tidak ditemukan</p>
+            <p className="font-semibold text-lg">
+              {currentCategory === "promosi"
+                ? "Belum ada promosi yang tersedia saat ini"
+                : "Artikel tidak ditemukan"}
+            </p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {currentCategory === "promosi"
+                ? "Silakan cek kembali nanti untuk informasi dan penawaran promosi terbaru."
+                : "Coba cari dengan kata kunci lain atau pilih kategori yang berbeda."}
+            </p>
           </div>
         )}
       </div>

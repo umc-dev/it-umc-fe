@@ -113,6 +113,10 @@ const NAV_ITEMS: NavItem[] = [
     href: "/berita",
   },
   {
+    label: "Promosi",
+    href: "/promosi",
+  },
+  {
     label: "Fasilitas",
     href: "/fasilitas",
   },
@@ -181,7 +185,7 @@ export default function Navbar() {
           </Link>
 
           {/* --- DESKTOP MENU --- */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <div key={item.label}>
                 {item.children ? (
@@ -256,21 +260,21 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <LanguageSwitcher />
             </div>
             <Link 
               href="https://pmb.umc.ac.id" 
               target="_blank" 
-              className="hidden md:inline-flex px-4 py-2 bg-accent text-white font-semibold rounded-xl hover:bg-accent/90 shadow-md transition-all text-sm"
+              className="hidden lg:inline-flex px-4 py-2 bg-accent text-white font-semibold rounded-xl hover:bg-accent/90 shadow-md transition-all text-sm"
             >
               Daftar Sekarang
             </Link>
 
-            {/* --- MOBILE MENU BUTTON --- */}
+            {/* --- MOBILE / TABLET MENU BUTTON --- */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+              className="lg:hidden p-2 hover:bg-muted rounded-lg transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -278,9 +282,9 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* --- MOBILE MENU --- */}
+        {/* --- MOBILE & TABLET MENU --- */}
         {isOpen && (
-          <div className="md:hidden border-t border-border mt-1">
+          <div className="lg:hidden border-t border-border mt-1">
             <div className="py-4 space-y-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
               {NAV_ITEMS.map((item) => (
                 <div key={item.label}>
