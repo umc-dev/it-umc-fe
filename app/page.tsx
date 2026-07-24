@@ -3,10 +3,12 @@ import { getPartnerships } from "@/actions/partnerships";
 import { getVisionMission } from "@/actions/visionMission";
 import { getStatisticStudents } from "@/actions/statisticStudent";
 import { getAlumni } from "@/actions/alumni";
+import Link from "next/link";
 
 import Hero from "@/components/Sections/Hero";
 import LatestNews from "@/components/Sections/LatestNews";
 import Partners from "@/components/Sections/Partners";
+import ProgramGateways from "@/components/Sections/ProgramGateways";
 import ProgramInfo from "@/components/Sections/ProgramInfo";
 import StudentStatistics from "@/components/Sections/StudentStatistics";
 import AlumniTestimonials from "@/components/Sections/AlumniTestimonials";
@@ -53,7 +55,8 @@ export default async function Home() {
   return (
     <>
       <Hero stats={heroStats} />
-      <ProgramInfo visionMission={visionMissionData} />
+      <ProgramGateways />
+      <ProgramInfo showVisionMission={false} />
       <StudentStatistics data={statisticsData} />
       <AlumniTestimonials alumni={alumniData} />
       <LatestNews news={allNews} />

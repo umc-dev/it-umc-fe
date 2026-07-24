@@ -6,12 +6,14 @@ interface GetStatisticParams {
   limit?: number;
   page?: number;
   search?: number; // Search by year based on controller
+  prodi?: "S1" | "D3";
 }
 
 export async function getStatisticStudents({
   limit = 100, // Ambil banyak supaya grafiknya lengkap
   page = 1,
   search,
+  prodi,
 }: GetStatisticParams = {}): Promise<PaginatedStatisticStudentResponse> {
   const params = new URLSearchParams({
     limit: String(limit),
@@ -20,6 +22,10 @@ export async function getStatisticStudents({
 
   if (search) {
     params.append("search", String(search));
+  }
+
+  if (prodi) {
+    params.set("prodi", prodi);
   }
 
   const res = await fetch(`${API_URL}/statistic-student?${params.toString()}`, {

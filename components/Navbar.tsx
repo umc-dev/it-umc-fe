@@ -27,54 +27,90 @@ const NAV_ITEMS: NavItem[] = [
     href: "/",
   },
   {
-    label: "Berita",
-    href: "/berita",
-  },
-  {
-    label: "Akademik",
+    label: "S1 Teknik Informatika",
     href: null,
     children: [
       {
-        label: "Distribusi Mata Kuliah",
-        href: "/akademik/distribusi-mata-kuliah",
-        description: "Pedoman & Struktur Pembelajaran",
+        label: "Profil",
+        href: "/s1",
+        description: "Visi, misi, dan profil prodi",
       },
       {
-        label: "UKT",
-        href: "https://pmb.umc.ac.id/assets/pdf/biayakuliah.pdf",
-        description: "Biaya Pendidikan",
+        label: "Kurikulum",
+        href: "/s1/akademik/distribusi-mata-kuliah",
+        description: "Daftar mata kuliah dan kurikulum",
+      },
+      {
+        label: "Dosen",
+        href: "/s1/dosen",
+        description: "Daftar staf pengajar",
+      },
+      {
+        label: "Kepala Program Studi",
+        href: "/s1/dosen/kepala-program-studi",
+        description: "Daftar pimpinan program studi",
+      },
+      {
+        label: "Prestasi",
+        href: "/s1/prestasi",
+        description: "Pencapaian mahasiswa",
       },
       {
         label: "Prospek Karir",
         href: "/akademik/prospek-karir",
-        description: "Peluang Karir Lulusan",
+        description: "Peluang kerja lulusan",
       },
       {
-        label: "Prestasi Mahasiswa",
-        href: "/prestasi",
-        description: "Pencapaian Mahasiswa",
+        label: "Biaya Kuliah",
+        href: "https://pmb.umc.ac.id/assets/pdf/biayakuliah2627.pdf",
+        description: "Informasi UKT dan biaya",
       },
     ],
   },
   {
-    label: "Dosen",
+    label: "D3 Teknik Informatika",
     href: null,
     children: [
       {
-        label: "Daftar Dosen",
-        href: "/dosen",
-        description: "Staff Pengajar Teknik Informatika",
+        label: "Profil",
+        href: "/d3",
+        description: "Visi, misi, dan profil prodi",
       },
       {
-        label: "Sejarah Kaprodi",
-        href: "/dosen/kepala-program-studi",
-        description: "Sejarah Kepala Program Studi",
+        label: "Kurikulum",
+        href: "/d3/akademik/distribusi-mata-kuliah",
+        description: "Daftar mata kuliah dan kurikulum",
+      },
+      {
+        label: "Dosen",
+        href: "/d3/dosen",
+        description: "Daftar staf pengajar",
+      },
+      {
+        label: "Kepala Program Studi",
+        href: "/d3/dosen/kepala-program-studi",
+        description: "Daftar pimpinan program studi",
+      },
+      {
+        label: "Prestasi",
+        href: "/d3/prestasi",
+        description: "Pencapaian mahasiswa",
+      },
+      {
+        label: "Prospek Karir",
+        href: "/akademik/prospek-karir",
+        description: "Peluang kerja lulusan",
+      },
+      {
+        label: "Biaya Kuliah",
+        href: "https://pmb.umc.ac.id/assets/pdf/biayakuliah2627.pdf",
+        description: "Informasi UKT dan biaya",
       },
     ],
   },
   {
-    label: "Alumni",
-    href: "/alumni",
+    label: "Berita",
+    href: "/berita",
   },
   {
     label: "Fasilitas",
@@ -85,8 +121,8 @@ const NAV_ITEMS: NavItem[] = [
     href: "/kerja-sama",
   },
   {
-    label: "Pendaftaran",
-    href: "https://pmb.umc.ac.id",
+    label: "Alumni",
+    href: "/alumni",
   },
 ];
 
@@ -99,6 +135,7 @@ export default function Navbar() {
   const isActive = (href: string | null): boolean => {
     if (!href) return false;
     if (href === "/") return pathname === "/";
+    if (href === "/s1" || href === "/d3") return pathname === href;
     return pathname.startsWith(href);
   };
 
@@ -218,10 +255,17 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <div className="hidden md:block">
               <LanguageSwitcher />
             </div>
+            <Link 
+              href="https://pmb.umc.ac.id" 
+              target="_blank" 
+              className="hidden md:inline-flex px-4 py-2 bg-accent text-white font-semibold rounded-xl hover:bg-accent/90 shadow-md transition-all text-sm"
+            >
+              Daftar Sekarang
+            </Link>
 
             {/* --- MOBILE MENU BUTTON --- */}
             <button
@@ -302,13 +346,9 @@ export default function Navbar() {
                       onClick={closeMobileMenu}
                       className={`block px-5 py-3.5 rounded-xl font-medium transition-all
                         ${
-                          item.label === "Pendaftaran"
-                            ? isActive(item.href)
-                              ? "bg-accent text-white"
-                              : "bg-accent/5 text-accent hover:bg-accent/15"
-                            : isActive(item.href)
-                              ? "bg-accent text-white font-semibold"
-                              : "text-foreground hover:bg-accent/5"
+                          isActive(item.href)
+                            ? "bg-accent text-white font-semibold"
+                            : "text-foreground hover:bg-accent/5"
                         }`}
                     >
                       {item.label}
@@ -317,12 +357,22 @@ export default function Navbar() {
                 </div>
               ))}
 
-              {/* --- Language Switcher (Mobile Only) --- */}
-              <div className="border-t border-border mt-3 pt-4 px-5 flex items-center justify-between">
-                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-                  Bahasa
-                </p>
-                <LanguageSwitcher />
+              {/* --- CTA & Language Switcher (Mobile Only) --- */}
+              <div className="border-t border-border mt-3 pt-4 px-5 space-y-4">
+                <Link 
+                  href="https://pmb.umc.ac.id" 
+                  target="_blank"
+                  onClick={closeMobileMenu}
+                  className="block text-center w-full px-5 py-3 rounded-xl bg-accent text-white font-semibold shadow-md hover:bg-accent/90 transition-all text-sm"
+                >
+                  Daftar Sekarang
+                </Link>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                    Bahasa
+                  </p>
+                  <LanguageSwitcher />
+                </div>
               </div>
             </div>
           </div>

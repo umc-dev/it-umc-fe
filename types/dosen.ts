@@ -18,6 +18,9 @@ export interface Dosen {
   photo: string | null;
   teaching: string;
   research: string;
+  education?: string | null;
+  description?: string | null;
+  prodi?: "S1" | "D3";
   createdAt: string;
   updatedAt: string;
   positions: DosenPosition[];

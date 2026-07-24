@@ -5,6 +5,7 @@ export interface Alumni {
   video: string | null; // URL video (bisa YouTube atau direct link)
   message: string;
   year: number;
+  prodi: "S1" | "D3";
   createdAt: string;
   updatedAt: string;
 }

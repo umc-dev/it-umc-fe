@@ -27,7 +27,7 @@ export default function DosenGroupSection({
         <h3 className="text-2xl font-bold text-primary">{groupName}</h3>
       </div>
       
-      <DosenGrid members={paginatedMembers} />
+      <DosenGrid members={paginatedMembers} groupName={groupName} />
 
       {totalPages > 1 && (
         <div className="mt-8">

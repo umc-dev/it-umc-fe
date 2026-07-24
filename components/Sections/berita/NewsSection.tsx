@@ -6,6 +6,8 @@ import type { News } from "@/types/news";
 import NewsCard from "./NewsCard";
 import Pagination from "@/components/Pagination";
 
+import type { Category } from "@/types/category";
+
 type Props = {
   items: News[];
   search: string;
@@ -15,16 +17,18 @@ type Props = {
     limit: number;
     totalPages: number;
   };
+  categories?: Category[];
+  currentCategory?: string;
 };
 
-export default function NewsSection({ items, search, meta }: Props) {
+export default function NewsSection({ items, search, meta, categories = [], currentCategory = "" }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const updateParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (key === "limit" || key === "search") {
+    if (key === "limit" || key === "search" || key === "category") {
       params.set("page", "1");
     }
 
@@ -40,9 +44,33 @@ export default function NewsSection({ items, search, meta }: Props) {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
-        {/* Filter */}
-        <div className="flex flex-col md:flex-row justify-between gap-6 mb-12">
-          <div className="flex flex-wrap gap-2"></div>
+        {/* Filter & Search */}
+        <div className="flex flex-col md:flex-row justify-between gap-6 mb-12 border-b border-border/40 pb-6">
+          <div className="flex overflow-x-auto gap-2 py-1.5 flex-nowrap md:flex-wrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <button
+              onClick={() => updateParams("category", "")}
+              className={`whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-full cursor-pointer transition-all duration-200 ${
+                !currentCategory
+                  ? "bg-primary text-white shadow-md"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+              }`}
+            >
+              Semua Berita
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => updateParams("category", cat.slug)}
+                className={`whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-full cursor-pointer transition-all duration-200 ${
+                  currentCategory === cat.slug
+                    ? "bg-primary text-white shadow-md"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
 
           {/* Search */}
           <div className="relative w-full md:w-80">

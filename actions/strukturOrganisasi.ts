@@ -2,9 +2,12 @@ import { StrukturOrganisasiResponse } from "@/types/strukturOrganisasi";
 
 const API_URL = process.env.API_URL!;
 
-export async function getStrukturOrganisasi(): Promise<StrukturOrganisasiResponse> {
+export async function getStrukturOrganisasi(prodi?: string): Promise<StrukturOrganisasiResponse> {
   try {
-    const res = await fetch(`${API_URL}/organizational-structure`, {
+    const url = prodi 
+      ? `${API_URL}/organizational-structure?prodi=${prodi.toUpperCase()}` 
+      : `${API_URL}/organizational-structure`;
+    const res = await fetch(url, {
       next: {
         revalidate: 300, 
       },

@@ -3,6 +3,7 @@ export interface StatisticStudent {
   year: number;
   enteredStudents: number;
   graduatedStudents: number;
+  prodi?: "S1" | "D3";
   createdAt: string;
   updatedAt: string;
 }

@@ -2,9 +2,13 @@ import { StudyPagination } from "@/types/studies";
 
 const API_URL = process.env.API_URL!;
 
-export async function getStudies(): Promise<StudyPagination> {
+export async function getStudies(params?: { prodi?: "S1" | "D3" }): Promise<StudyPagination> {
+  const searchParams = new URLSearchParams({ limit: "1" });
+  if (params?.prodi) {
+    searchParams.set("prodi", params.prodi);
+  }
   // Hanya ambil limit 1 atau default karena umumnya distribusi mata kuliah cuma 1 dokumen aktif
-  const res = await fetch(`${API_URL}/studies?limit=1`, {
+  const res = await fetch(`${API_URL}/studies?${searchParams.toString()}`, {
     next: { revalidate: 60 }, // Cache 1 menit
   });
 
