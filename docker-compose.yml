@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: it-umc-fe-prod
+    restart: always
+    ports:
+      - "8080:3000"
+    environment:
+      - NODE_ENV=production
+    # If there are environment variables needed from .env in production,
+    # you can uncomment the env_file block below:
+    # env_file:
+    #   - .env
