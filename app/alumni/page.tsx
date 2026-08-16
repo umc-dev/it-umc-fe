@@ -1,5 +1,6 @@
 import { getAlumni } from "@/actions/alumni";
 import AlumniGrid from "@/components/alumni/AlumniGrid";
+import SubmitAlumniModal from "@/components/alumni/SubmitAlumniModal";
 import { GraduationCap } from "lucide-react";
 import type { Alumni } from "@/types/alumni";
 import Pagination from "@/components/Pagination";
@@ -72,38 +73,42 @@ export default async function AlumniPage({ searchParams }: Props) {
               </p>
             </div>
             
-            {/* Filter Prodi Tabs */}
-            <div className="flex bg-muted/60 p-1.5 rounded-2xl border border-border shadow-xs self-start md:self-end">
-              <Link
-                href="/alumni"
-                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
-                  !prodi
-                    ? "bg-white text-primary shadow-md border border-border/10"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Semua
-              </Link>
-              <Link
-                href="/alumni?prodi=s1"
-                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
-                  prodi === "S1"
-                    ? "bg-white text-primary shadow-md border border-border/10"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                S1
-              </Link>
-              <Link
-                href="/alumni?prodi=d3"
-                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
-                  prodi === "D3"
-                    ? "bg-white text-primary shadow-md border border-border/10"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                D3
-              </Link>
+            {/* Action & Filter Prodi Tabs */}
+            <div className="flex flex-wrap items-center gap-3 self-start md:self-end">
+              <SubmitAlumniModal />
+
+              <div className="flex bg-muted/60 p-1.5 rounded-2xl border border-border shadow-xs">
+                <Link
+                  href="/alumni"
+                  className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
+                    !prodi
+                      ? "bg-white text-primary shadow-md border border-border/10"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Semua
+                </Link>
+                <Link
+                  href="/alumni?prodi=s1"
+                  className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
+                    prodi === "S1"
+                      ? "bg-white text-primary shadow-md border border-border/10"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  S1
+                </Link>
+                <Link
+                  href="/alumni?prodi=d3"
+                  className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all ${
+                    prodi === "D3"
+                      ? "bg-white text-primary shadow-md border border-border/10"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  D3
+                </Link>
+              </div>
             </div>
           </div>
 

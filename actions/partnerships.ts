@@ -1,6 +1,6 @@
-import { PaginatedPartnershipResponse } from "@/types/partnership";
+import { PaginatedPartnershipResponse, Partnership } from "@/types/partnership";
 
-const API_URL = process.env.API_URL!;
+const API_URL = process.env.API_URL || "http://localhost:9090/api/v1";
 
 interface GetPartnershipParams {
   limit?: number;
@@ -38,4 +38,18 @@ export async function getPartnerships({
   }
 
   return res.json();
+}
+
+export async function getPartnershipById(id: string): Promise<Partnership | null> {
+  try {
+    const res = await fetch(`${API_URL}/partnerships/${id}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.data || null;
+  } catch (error) {
+    console.error("Error fetching partnership by id:", error);
+    return null;
+  }
 }

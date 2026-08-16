@@ -1,11 +1,17 @@
 export interface Alumni {
   id: string;
   name: string;
-  photo?: string | null; // URL foto alumni
-  video: string | null; // URL video (bisa YouTube atau direct link)
+  photo?: string | null;
+  workplace?: string | null;
+  position?: string | null;
+  linkedin?: string | null;
+  instagram?: string | null;
+  video: string | null;
   message: string;
   year: number;
+  graduationYear?: number | null;
   prodi: "S1" | "D3";
+  isApproved?: boolean;
   createdAt: string;
   updatedAt: string;
 }

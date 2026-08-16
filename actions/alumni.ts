@@ -58,3 +58,21 @@ export async function getAlumni({
     };
   }
 }
+
+export async function submitPublicAlumni(formData: FormData) {
+  try {
+    const res = await fetch(`${API_URL}/alumni/public`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const json = await res.json();
+    if (!res.ok) {
+      throw new Error(json.message || "Gagal mengirimkan testimoni alumni.");
+    }
+    return json;
+  } catch (error: any) {
+    console.error("Error submitting public alumni:", error);
+    throw error;
+  }
+}

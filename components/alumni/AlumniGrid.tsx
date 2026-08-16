@@ -3,7 +3,7 @@
 import type { Alumni } from "@/types/alumni";
 import Image from "next/image";
 import Link from "next/link";
-import { GraduationCap, PlayCircle, Quote, User } from "lucide-react";
+import { GraduationCap, PlayCircle, Quote, User, Briefcase, Linkedin, Instagram } from "lucide-react";
 import { SkeletonCard } from "@/components/skeletons/skeleton-card"; 
 import { SKELETON_COUNTS } from "@/lib/skeleton-utils";
 
@@ -39,31 +39,73 @@ export default function AlumniGrid({
                 />
                 
                 {/* Overlay Gradient for Text readability */}
-                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
                 {/* Badge Year */}
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                  <span className="bg-primary/90 text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
+                  <span className="bg-primary/90 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
                     <GraduationCap size={12} />
-                    Lulusan Tahun {member.year}
+                    Angkatan {member.year} {member.graduationYear ? `(Lulus ${member.graduationYear})` : ""}
                   </span>
                 </div>
               </div>
 
               {/* Content Section */}
               <div className="p-6 flex flex-col grow">
-                <h3 className="text-lg font-bold text-foreground mb-1 line-clamp-1">
-                  {member.name}
-                </h3>
-                <p className="text-sm font-medium text-accent mb-4">
-                  Alumni {member.prodi === "D3" ? "D3 Teknik Informatika" : "S1 Teknik Informatika"}
-                </p>
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground mb-0.5 line-clamp-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs font-semibold text-accent mb-2">
+                      Alumni {member.prodi === "D3" ? "D3 Teknik Informatika" : "S1 Teknik Informatika"}
+                    </p>
+                  </div>
+
+                  {/* Social Media Links */}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {member.linkedin && (
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white transition-colors"
+                        title="LinkedIn Profile"
+                      >
+                        <Linkedin size={14} />
+                      </a>
+                    )}
+                    {member.instagram && (
+                      <a
+                        href={member.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1.5 rounded-lg bg-pink-500/10 text-pink-600 dark:text-pink-400 hover:bg-pink-500 hover:text-white transition-colors"
+                        title="Instagram Profile"
+                      >
+                        <Instagram size={14} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Workplace & Position */}
+                {(member.position || member.workplace) && (
+                  <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground mb-4 bg-muted/50 px-3 py-1.5 rounded-lg border border-border/50">
+                    <Briefcase size={14} className="text-primary shrink-0" />
+                    <span className="truncate">
+                      {member.position ? member.position : ""}
+                      {member.position && member.workplace ? " at " : ""}
+                      {member.workplace ? member.workplace : ""}
+                    </span>
+                  </div>
+                )}
 
                 {/* Testimonial Snippet */}
                 <div className="relative bg-muted/30 p-4 rounded-lg mb-4 grow">
                   <Quote className="absolute top-2 left-2 text-primary/10 w-6 h-6" />
                   <p className="text-sm text-muted-foreground italic line-clamp-3 relative z-10">
-                    &quot;{member.message}&ldquo;
+                    &quot;{member.message}&quot;
                   </p>
                 </div>
 
@@ -74,7 +116,7 @@ export default function AlumniGrid({
                       href={member.video}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all shadow-sm group-hover:shadow-md"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-primary/90 transition-all shadow-sm group-hover:shadow-md"
                     >
                       <PlayCircle size={16} />
                       Tonton Video Testimoni  

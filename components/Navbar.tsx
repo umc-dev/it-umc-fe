@@ -121,6 +121,10 @@ const NAV_ITEMS: NavItem[] = [
     href: "/fasilitas",
   },
   {
+    label: "Akreditasi",
+    href: "/akreditasi",
+  },
+  {
     label: "Kerja Sama",
     href: "/kerja-sama",
   },
