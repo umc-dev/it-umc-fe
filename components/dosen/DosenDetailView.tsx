@@ -5,6 +5,7 @@ import type { Dosen, DosenTridharma } from "@/types/dosen";
 import { 
   GraduationCap, 
   BookOpen, 
+  Microscope,
   Users, 
   Calendar,
   Briefcase,
@@ -34,9 +35,9 @@ export default function DosenDetailView({ dosen }: DosenDetailViewProps) {
   const getTabIcon = (tab: TabType) => {
     switch (tab) {
       case "PENGAJARAN":
-        return <GraduationCap className="w-5 h-5" />;
-      case "PENELITIAN":
         return <BookOpen className="w-5 h-5" />;
+      case "PENELITIAN":
+        return <Microscope className="w-5 h-5" />;
       case "PENGABDIAN":
         return <Users className="w-5 h-5" />;
     }
