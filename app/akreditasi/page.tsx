@@ -1,5 +1,5 @@
 import { getAccreditations } from "@/actions/accreditation";
-import { Award, FileText, ExternalLink, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { FileText, ExternalLink, ShieldCheck, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -40,16 +40,11 @@ export default async function AkreditasiPage({ searchParams }: Props) {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-primary text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white mb-6 backdrop-blur-md border border-white/20">
-            <Award className="w-5 h-5 text-accent" />
-            <span className="text-sm font-semibold">Jaminan Mutu & Kualitas Pendidikan</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Akreditasi Resmi</h1>
+      <section className="bg-primary text-white py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Akreditasi</h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Komitmen kami dalam menyelenggarakan pendidikan tinggi berkualitas tinggi yang diakui oleh Lembaga Akreditasi Nasional.
+            Informasi resmi akreditasi Program Studi dan Perguruan Tinggi Universitas Muhammadiyah Cirebon
           </p>
         </div>
       </section>
@@ -113,11 +108,11 @@ export default async function AkreditasiPage({ searchParams }: Props) {
                   <div>
                     {/* Badge Category & Grade */}
                     <div className="flex items-center justify-between mb-4">
-                      <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-primary/10 text-primary border border-primary/20">
+                      <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">
                         {item.category} {item.prodi ? `(${item.prodi})` : ""}
                       </span>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-muted text-foreground border border-border">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
                         {item.grade}
                       </span>
                     </div>
