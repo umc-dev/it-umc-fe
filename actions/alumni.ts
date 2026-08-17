@@ -1,12 +1,24 @@
+"use server";
+
 import { PaginatedAlumniResponse } from "@/types/alumni";
 
-const API_URL = process.env.API_URL!;
+const API_URL = process.env.API_URL || "http://localhost:9090/api/v1";
 
 interface GetAlumniParams {
   limit?: number;
   page?: number;
   search?: string;
   prodi?: string;
+}
+
+interface ApiResponseErrorItem {
+  message?: string;
+}
+
+interface ApiResponsePayload {
+  message?: string;
+  errors?: ApiResponseErrorItem[];
+  data?: unknown;
 }
 
 export async function getAlumni({
@@ -40,9 +52,6 @@ export async function getAlumni({
       };
     }
 
-    // Backend membungkus response dalam format { status, message, data, meta }
-    // Kita perlu menyesuaikan parsingnya berdasarkan controller backend Anda:
-    // res.json(ResponseHTTP.ok(result.data, 'Alumni fetched', result.meta))
     const json = await res.json();
     
     return {
@@ -61,18 +70,45 @@ export async function getAlumni({
 
 export async function submitPublicAlumni(formData: FormData) {
   try {
+    // Clean up empty optional fields
+    const photo = formData.get("photo");
+    if (photo instanceof File && photo.size === 0) {
+      formData.delete("photo");
+    }
+
+    const gradYear = formData.get("graduationYear");
+    if (gradYear !== null && gradYear.toString().trim() === "") {
+      formData.delete("graduationYear");
+    }
+
     const res = await fetch(`${API_URL}/alumni/public`, {
       method: "POST",
       body: formData,
     });
 
-    const json = await res.json();
-    if (!res.ok) {
-      throw new Error(json.message || "Gagal mengirimkan testimoni alumni.");
+    const contentType = res.headers.get("content-type");
+    let json: ApiResponsePayload | null = null;
+
+    if (contentType && contentType.includes("application/json")) {
+      json = (await res.json()) as ApiResponsePayload;
     }
+
+    if (!res.ok) {
+      const errorMsg =
+        json?.message ||
+        (Array.isArray(json?.errors)
+          ? json.errors.map((e: ApiResponseErrorItem) => e.message).filter(Boolean).join(", ")
+          : null) ||
+        "Gagal mengirimkan testimoni alumni.";
+      throw new Error(errorMsg);
+    }
+
     return json;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error submitting public alumni:", error);
-    throw error;
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(String(error));
   }
-}
+}

@@ -95,7 +95,7 @@ export default function AlumniGrid({
                     <Briefcase size={14} className="text-primary shrink-0" />
                     <span className="truncate">
                       {member.position ? member.position : ""}
-                      {member.position && member.workplace ? " at " : ""}
+                      {member.position && member.workplace ? " di " : ""}
                       {member.workplace ? member.workplace : ""}
                     </span>
                   </div>

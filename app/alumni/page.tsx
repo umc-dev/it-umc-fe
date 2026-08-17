@@ -1,7 +1,6 @@
 import { getAlumni } from "@/actions/alumni";
 import AlumniGrid from "@/components/alumni/AlumniGrid";
-import SubmitAlumniModal from "@/components/alumni/SubmitAlumniModal";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, UserPlus } from "lucide-react";
 import type { Alumni } from "@/types/alumni";
 import Pagination from "@/components/Pagination";
 import Link from "next/link";
@@ -75,7 +74,13 @@ export default async function AlumniPage({ searchParams }: Props) {
             
             {/* Action & Filter Prodi Tabs */}
             <div className="flex flex-wrap items-center gap-3 self-start md:self-end">
-              <SubmitAlumniModal />
+              <Link
+                href="/alumni/tambah"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition shadow-md hover:shadow-lg"
+              >
+                <UserPlus size={18} />
+                Isi Form Testimoni Alumni
+              </Link>
 
               <div className="flex bg-muted/60 p-1.5 rounded-2xl border border-border shadow-xs">
                 <Link

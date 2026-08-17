@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Quote, User, GraduationCap, Play, ArrowRight, PauseCircle } from "lucide-react";
+import { Quote, User, GraduationCap, Play, ArrowRight, PauseCircle, Briefcase, Linkedin, Instagram } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import type { Alumni } from "@/types/alumni";
@@ -138,8 +138,8 @@ export default function AlumniTestimonials({ alumni = [] }: AlumniTestimonialsPr
                   {/* --- START CARD DESIGN --- */}
                   <div className="group relative flex h-full flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5">
                     
-                    {/* 1. Header: Foto & Nama */}
-                    <div className="mb-6 flex items-center gap-4">
+                    {/* 1. Header: Foto, Nama, Socials */}
+                    <div className="mb-4 flex items-start gap-3">
                       <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-background shadow-md bg-muted">
                         <Image
                           src={item.photo || "/teknisi-pria-dengan-tools.webp"}
@@ -150,16 +150,57 @@ export default function AlumniTestimonials({ alumni = [] }: AlumniTestimonialsPr
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="truncate font-bold text-foreground text-lg">
-                          {item.name}
-                        </h4>
-                        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                          <GraduationCap className="h-3.5 w-3.5 text-primary" />
-                          {item.prodi === "D3" ? "D3" : "S1"} • Lulusan {item.year}
+                        <div className="flex items-center justify-between gap-1">
+                          <h4 className="truncate font-bold text-foreground text-lg">
+                            {item.name}
+                          </h4>
+                          {/* Social Media Links */}
+                          <div className="flex items-center gap-1 shrink-0">
+                            {item.linkedin && (
+                              <a
+                                href={item.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white transition-colors"
+                                title="LinkedIn Profile"
+                              >
+                                <Linkedin size={13} />
+                              </a>
+                            )}
+                            {item.instagram && (
+                              <a
+                                href={item.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-1 rounded-md bg-pink-500/10 text-pink-600 dark:text-pink-400 hover:bg-pink-500 hover:text-white transition-colors"
+                                title="Instagram Profile"
+                              >
+                                <Instagram size={13} />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground mt-0.5">
+                          <GraduationCap className="h-3.5 w-3.5 text-primary shrink-0" />
+                          <span>
+                            {item.prodi === "D3" ? "D3" : "S1"} • Angkatan {item.year}
+                            {item.graduationYear ? ` (Lulus ${item.graduationYear})` : ""}
+                          </span>
                         </div>
                       </div>
-                      <Quote className="h-8 w-8 text-primary/10 rotate-180" />
                     </div>
+
+                    {/* Workplace & Position Badge */}
+                    {(item.position || item.workplace) && (
+                      <div className="mb-4 flex items-center gap-2 text-xs font-medium text-muted-foreground bg-muted/60 px-3 py-1.5 rounded-lg border border-border/50">
+                        <Briefcase size={14} className="text-primary shrink-0" />
+                        <span className="truncate">
+                          {item.position ? item.position : ""}
+                          {item.position && item.workplace ? " di " : ""}
+                          {item.workplace ? item.workplace : ""}
+                        </span>
+                      </div>
+                    )}
 
                     {/* 2. Body: Message (Speech Bubble Style) */}
                     <div className="relative mb-6 flex-1">
