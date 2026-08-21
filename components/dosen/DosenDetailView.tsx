@@ -11,7 +11,9 @@ import {
   Briefcase,
   Layers,
   ArrowLeft,
-  ExternalLink
+  ExternalLink,
+  Mail,
+  User
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,36 +57,27 @@ export default function DosenDetailView({ dosen }: DosenDetailViewProps) {
   };
 
   const getActivePosition = () => {
-    if (!dosen.positions || dosen.positions.length === 0) return "Dosen";
+    if (!dosen.positions || dosen.positions.length === 0) return "Dosen Program Studi";
     const activePosition = dosen.positions.find((p) => !p.endDate);
     return activePosition ? activePosition.lectureship.name : dosen.positions[0].lectureship.name;
   };
 
-  const getPeriodString = () => {
-    if (!dosen.positions || dosen.positions.length === 0) return "";
-    const activePosition = dosen.positions.find((p) => !p.endDate);
-    const latestPosition = activePosition ?? dosen.positions[0];
-    if (latestPosition.startDate) {
-      const startYear = new Date(latestPosition.startDate).getFullYear();
-      const endYear = latestPosition.endDate
-        ? new Date(latestPosition.endDate).getFullYear()
-        : "Sekarang";
-      return `${startYear} - ${endYear}`;
-    }
-    return "";
+  const getProdiFullName = (prodi?: "S1" | "D3") => {
+    if (!prodi) return "Teknik Informatika";
+    return prodi === "S1" ? "S1 Teknik Informatika" : "D3 Teknik Informatika";
   };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 transition-colors duration-300">
       {/* Header Bar */}
-      <div className="bg-white border-b border-slate-200 py-4 shadow-sm">
+      <div className="bg-white border-b border-slate-200 py-4 shadow-xs">
         <div className="container mx-auto px-4">
           <Link 
-            href="/dosen" 
+            href={`/${(dosen.prodi || "S1").toLowerCase()}/dosen`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent transition-colors cursor-pointer group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            Kembali ke Daftar Dosen
+            Kembali ke Daftar Dosen {getProdiFullName(dosen.prodi)}
           </Link>
         </div>
       </div>
@@ -93,7 +86,7 @@ export default function DosenDetailView({ dosen }: DosenDetailViewProps) {
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           
           {/* Profile Sidebar */}
-          <div className="w-full lg:w-1/3 bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm flex flex-col transition-all duration-300">
+          <div className="w-full lg:w-1/3 bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-xs flex flex-col transition-all duration-300">
             {/* Avatar container */}
             <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20 shadow-lg">
               <Image
@@ -110,66 +103,130 @@ export default function DosenDetailView({ dosen }: DosenDetailViewProps) {
               <h1 className="text-2xl md:text-3xl font-extrabold text-primary mb-2 leading-tight">
                 {dosen.name}
               </h1>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/15 text-accent text-xs font-semibold rounded-full mb-4">
-                <Briefcase size={12} />
-                {getActivePosition()}
+
+              <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/15 text-accent text-xs font-semibold rounded-full">
+                  <Briefcase size={12} />
+                  {getActivePosition()}
+                </span>
+                {dosen.prodi && (
+                  <span className="inline-flex items-center px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold rounded-full">
+                    {getProdiFullName(dosen.prodi)}
+                  </span>
+                )}
               </div>
 
-              {dosen.nidn && (
-                <div className="bg-slate-50 rounded-xl p-3 mb-6 text-center max-w-xs mx-auto border border-slate-100">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider mb-0.5">NIDN</span>
-                  <span className="font-mono text-sm font-semibold text-slate-700 tracking-wider">
-                    {dosen.nidn}
-                  </span>
-                </div>
-              )}
+              <div className="bg-slate-50 rounded-xl p-3 mb-6 text-center max-w-xs mx-auto border border-slate-100 space-y-2">
+                {dosen.nidn && (
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider mb-0.5">NIDN</span>
+                    <span className="font-mono text-sm font-semibold text-slate-700 tracking-wider">
+                      {dosen.nidn}
+                    </span>
+                  </div>
+                )}
+
+                {dosen.email && (
+                  <div className="pt-2 border-t border-slate-200/60">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider mb-0.5">Kontak Email</span>
+                    <a
+                      href={`mailto:${dosen.email}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
+                    >
+                      <Mail size={12} />
+                      <span>{dosen.email}</span>
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Dosen Details Section */}
             <div className="space-y-5 text-sm mt-2 border-t border-slate-100 pt-5">
               <div>
                 <span className="text-[11px] uppercase font-bold text-slate-400 block tracking-wider mb-1">
-                  Keahlian & Spesialisasi
+                  Bidang Keahlian
                 </span>
                 <span className="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-md">
                   {dosen.expertise}
                 </span>
               </div>
 
-              {getPeriodString() && (
+              {dosen.education && (
                 <div>
                   <span className="text-[11px] uppercase font-bold text-slate-400 block tracking-wider mb-1">
-                    Masa Jabatan
+                    Riwayat Pendidikan
                   </span>
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Calendar size={14} className="text-accent" />
-                    <span className="text-xs font-medium">{getPeriodString()}</span>
+                  <div className="flex items-start gap-2 text-slate-700 text-xs leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <GraduationCap size={16} className="text-primary shrink-0 mt-0.5" />
+                    <span>{dosen.education}</span>
                   </div>
                 </div>
               )}
 
               <div>
-                <span className="text-[11px] uppercase font-bold text-slate-400 block tracking-wider mb-1">
-                  Ringkasan Pengajaran
+                <span className="text-[11px] uppercase font-bold text-slate-400 block tracking-wider mb-1.5">
+                  Profil Pengajaran
                 </span>
-                <p className="text-slate-600 text-xs leading-relaxed italic">
-                  "{dosen.teaching || "Tidak tersedia"}"
-                </p>
+                {dosen.teaching && (dosen.teaching.startsWith("http://") || dosen.teaching.startsWith("https://")) ? (
+                  <a
+                    href={dosen.teaching}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline bg-primary/5 hover:bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-lg transition-colors w-full justify-center"
+                  >
+                    <BookOpen size={14} className="shrink-0" />
+                    <span className="truncate">Profil Pengajaran / PDDIKTI</span>
+                    <ExternalLink size={12} className="shrink-0 opacity-70" />
+                  </a>
+                ) : (
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    {dosen.teaching || "Tidak tersedia"}
+                  </p>
+                )}
               </div>
 
               <div>
-                <span className="text-[11px] uppercase font-bold text-slate-400 block tracking-wider mb-1">
-                  Fokus Penelitian
+                <span className="text-[11px] uppercase font-bold text-slate-400 block tracking-wider mb-1.5">
+                  Riset & Publikasi Ilmiah
                 </span>
-                <p className="text-slate-600 text-xs leading-relaxed italic">
-                  "{dosen.research || "Tidak tersedia"}"
-                </p>
+                {dosen.research && (dosen.research.startsWith("http://") || dosen.research.startsWith("https://")) ? (
+                  <a
+                    href={dosen.research}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline bg-primary/5 hover:bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-lg transition-colors w-full justify-center"
+                  >
+                    <Microscope size={14} className="shrink-0" />
+                    <span className="truncate">Profil Google Scholar / SINTA</span>
+                    <ExternalLink size={12} className="shrink-0 opacity-70" />
+                  </a>
+                ) : (
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    {dosen.research || "Tidak tersedia"}
+                  </p>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Main Tridharma Content Area */}
-          <div className="flex-1 w-full bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300">
+          {/* Main Content Area */}
+          <div className="flex-1 w-full space-y-6">
+            {/* Description Card */}
+            {dosen.description && (
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-xs">
+                <h2 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <User className="w-5 h-5 text-primary" />
+                  Profil & Biografi Dosen
+                </h2>
+                <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line">
+                  {dosen.description}
+                </p>
+              </div>
+            )}
+
+            {/* Tridharma Records */}
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col transition-all duration-300">
             {/* Header Title */}
             <div className="p-6 md:p-8 pb-5 border-b border-slate-100">
               <h2 className="text-xl md:text-2xl font-bold text-slate-800 flex items-center gap-2.5">
@@ -280,6 +337,7 @@ export default function DosenDetailView({ dosen }: DosenDetailViewProps) {
               )}
             </div>
           </div>
+        </div>
 
         </div>
       </div>

@@ -107,18 +107,20 @@ export default function KaprodiGrid({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-1.5 py-1.5 px-2 text-xs font-medium bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-primary transition-colors"
+                  title="Profil Pengajaran / PDDIKTI"
                 >
-                  <BookOpen size={14} className="text-slate-500" />
-                  <span>Buku Ajar</span>
+                  <BookOpen size={14} className="text-slate-500 shrink-0" />
+                  <span className="line-clamp-1">Pengajaran</span>
                 </a>
                 <a
                   href={dosen.research}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-1.5 py-1.5 px-2 text-xs font-medium bg-slate-50 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-primary transition-colors"
+                  title="Profil Riset / Scholar / SINTA"
                 >
-                  <Microscope size={14} className="text-slate-500" />
-                  <span>Riset</span>
+                  <Microscope size={14} className="text-slate-500 shrink-0" />
+                  <span className="line-clamp-1">Riset & Scholar</span>
                 </a>
               </div>
 

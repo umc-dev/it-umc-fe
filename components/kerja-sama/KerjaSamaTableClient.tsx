@@ -75,7 +75,7 @@ export default function KerjaSamaTableClient({
     },
     {
       key: "files",
-      label: "Dokumen MOU/MOA",
+      label: "Dokumentasi & Bukti",
       render: (_, row: Partnership) => (
         <div className="flex flex-col gap-1">
           {row.files && row.files.length > 0 ? (
