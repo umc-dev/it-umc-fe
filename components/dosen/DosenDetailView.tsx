@@ -218,9 +218,30 @@ export default function DosenDetailView({ dosen }: DosenDetailViewProps) {
                       {/* Content Card */}
                       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:border-accent/40 hover:shadow-md transition-all duration-300">
                         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                          <span className="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
-                            Tahun {item.year}
-                          </span>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                              Tahun {item.year}
+                            </span>
+                            {item.category === "PENGAJARAN" && (
+                              <>
+                                {item.semester && item.semester !== "-" && (
+                                  <span className="bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                                    Semester: {item.semester}
+                                  </span>
+                                )}
+                                {item.credits && (
+                                  <span className="bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                                    {item.credits} SKS
+                                  </span>
+                                )}
+                                {item.class && item.class !== "-" && (
+                                  <span className="bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                                    Kelas: {item.class}
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </div>
                           
                           {item.link && (
                             <a

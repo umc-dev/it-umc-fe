@@ -43,6 +43,24 @@ export default function PrestasiTableClient({
       ),
     },
     {
+      key: "category",
+      label: "Kategori",
+      render: (_, row: Achievement) => {
+        const cat = row.category || "AKADEMIK";
+        return (
+          <span
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap ${
+              cat === "AKADEMIK"
+                ? "bg-blue-50 text-blue-700 border border-blue-200"
+                : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+            }`}
+          >
+            {cat === "AKADEMIK" ? "Akademik" : "Non-Akademik"}
+          </span>
+        );
+      },
+    },
+    {
       key: "achievedAt",
       label: "Tanggal Diraih",
       render: (_, row: Achievement) => (
