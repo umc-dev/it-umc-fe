@@ -5,11 +5,13 @@ import type { Achievement } from "@/types/achievement";
 export default async function PrestasiTableWrapper({ 
   search, 
   page,
-  prodi
+  prodi,
+  category,
 }: { 
   search: string; 
   page: number;
   prodi?: "S1" | "D3";
+  category?: "AKADEMIK" | "NON_AKADEMIK";
 }) {
   let achievementsList: Achievement[] = [];
   let meta = {
@@ -20,7 +22,7 @@ export default async function PrestasiTableWrapper({
   };
 
   try {
-    const response = await getAchievements({ limit: 10, page, search, prodi });
+    const response = await getAchievements({ limit: 10, page, search, prodi, category });
     
     if (response?.data) {
       achievementsList = response.data;

@@ -14,6 +14,7 @@ export interface Dosen {
   id: string;
   name: string;
   nidn: string | null;
+  email?: string | null;
   expertise: string;
   photo: string | null;
   teaching: string;
@@ -35,6 +36,9 @@ export interface DosenTridharma {
   year: number;
   description: string;
   link: string;
+  semester?: string;
+  credits?: number;
+  class?: string;
   createdAt: string;
   updatedAt: string;
 }

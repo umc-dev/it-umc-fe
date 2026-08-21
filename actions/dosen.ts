@@ -44,7 +44,7 @@ export async function getDosen(params?: {
  */
 export async function getDosenDetail(id: string): Promise<Dosen | null> {
   const res = await fetch(`${API_URL}/dosen/${id}`, {
-    next: { revalidate: 3600 }, // 1 jam
+    next: { revalidate: 60 }, // 1 menit
   });
 
   if (res.status === 404) {

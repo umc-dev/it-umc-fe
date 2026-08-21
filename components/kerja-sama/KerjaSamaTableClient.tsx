@@ -1,7 +1,7 @@
 "use client";
 
 import { DataTable, Column } from "@/components/DataTable";
-import { CalendarDays, LinkIcon } from "lucide-react";
+import { CalendarDays, LinkIcon, FileText } from "lucide-react";
 import type { Partnership } from "@/types/partnership";
 
 interface KerjaSamaTableClientProps {
@@ -17,7 +17,6 @@ export default function KerjaSamaTableClient({
   currentPage,
   totalItems,
 }: KerjaSamaTableClientProps) {
-  // Define Columns inside the Client Component
   const columns: Column<Partnership>[] = [
     {
       key: "no",
@@ -44,13 +43,18 @@ export default function KerjaSamaTableClient({
             <LinkIcon className="w-5 h-5 text-slate-300" />
           )}
         </div>
-      )
+      ),
     },
     {
       key: "name",
-      label: "Nama Mitra / Institusi",
+      label: "Nama Mitra & Deskripsi",
       render: (_, row: Partnership) => (
-        <span className="font-semibold text-slate-800 capitalize leading-snug">{row.name}</span>
+        <div className="flex flex-col">
+          <span className="font-semibold text-slate-800 capitalize leading-snug">{row.name}</span>
+          {row.description && (
+            <span className="text-xs text-slate-500 line-clamp-2 mt-0.5">{row.description}</span>
+          )}
+        </div>
       ),
     },
     {
@@ -67,8 +71,33 @@ export default function KerjaSamaTableClient({
             <span className="font-medium">{label}</span>
           </div>
         );
-      }
-    }
+      },
+    },
+    {
+      key: "files",
+      label: "Dokumentasi & Bukti",
+      render: (_, row: Partnership) => (
+        <div className="flex flex-col gap-1">
+          {row.files && row.files.length > 0 ? (
+            row.files.map((file) => (
+              <a
+                key={file.id}
+                href={file.fileUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-xs text-primary font-medium hover:underline truncate max-w-[180px]"
+                title={file.fileName}
+              >
+                <FileText className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">{file.fileName}</span>
+              </a>
+            ))
+          ) : (
+            <span className="text-xs text-slate-400">-</span>
+          )}
+        </div>
+      ),
+    },
   ];
 
   return (

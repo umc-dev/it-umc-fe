@@ -7,6 +7,7 @@ export async function getAchievements(params?: {
   limit?: number;
   search?: string;
   prodi?: "S1" | "D3";
+  category?: "AKADEMIK" | "NON_AKADEMIK";
 }): Promise<AchievementPagination> {
   const searchParams = new URLSearchParams();
 
@@ -24,8 +25,12 @@ export async function getAchievements(params?: {
     searchParams.set("prodi", params.prodi);
   }
 
+  if (params?.category) {
+    searchParams.set("category", params.category);
+  }
+
   const res = await fetch(`${API_URL}/achievement?${searchParams.toString()}`, {
-    next: { revalidate: 60 }, // 1 menit
+    next: { revalidate: 60 }, // 1 menitf
   });
 
   if (!res.ok) {

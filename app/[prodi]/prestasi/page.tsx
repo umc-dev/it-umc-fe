@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ prodi: string }>;
-  searchParams: Promise<{ page?: string; search?: string }>;
+  searchParams: Promise<{ page?: string; search?: string; category?: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -37,6 +37,7 @@ export default async function PrestasiPage({ params, searchParams }: PageProps) 
   const sParams = await searchParams;
   const page = sParams.page ? parseInt(sParams.page) : 1;
   const search = sParams.search || "";
+  const category = sParams.category as "AKADEMIK" | "NON_AKADEMIK" | undefined;
 
   const prodiName = prodiUpper === "S1" ? "S1 Teknik Informatika" : "D3 Teknik Informatika";
 
@@ -70,7 +71,7 @@ export default async function PrestasiPage({ params, searchParams }: PageProps) 
           </div>
 
           <Suspense fallback={<SkeletonTable />}>
-            <PrestasiTableWrapper search={search} page={page} prodi={prodiUpper as "S1" | "D3"} />
+            <PrestasiTableWrapper search={search} page={page} prodi={prodiUpper as "S1" | "D3"} category={category} />
           </Suspense>
         </div>
       </section>

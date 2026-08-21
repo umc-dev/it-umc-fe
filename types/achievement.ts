@@ -5,6 +5,7 @@ export interface Achievement {
   link: string;
   achievedAt: string;
   prodi?: "S1" | "D3";
+  category?: "AKADEMIK" | "NON_AKADEMIK";
   createdAt: string;
   updatedAt: string;
 }
