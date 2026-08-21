@@ -1,5 +1,6 @@
 services:
   web:
+    image: it-umc-fe:latest
     build:
       context: .
       dockerfile: Dockerfile
